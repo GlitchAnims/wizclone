@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://llx5ldfv67pu"]
+
+[ext_resource type="PackedScene" uid="uid://bx6iy0abyupfe" path="res://scenes/unit.tscn" id="1_538x7"]
+[ext_resource type="Resource" uid="uid://c2652k6rgrif5" path="res://configs/UnitConfigs/BloodfiendStats.tres" id="2_lwk0b"]
+
+[node name="Bloodfiend" instance=ExtResource("1_538x7")]
+stats = ExtResource("2_lwk0b")

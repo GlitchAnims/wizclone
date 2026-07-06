@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://dprf3ecs74f6i"]
+
+[ext_resource type="PackedScene" uid="uid://bx6iy0abyupfe" path="res://scenes/unit.tscn" id="1_04v54"]
+[ext_resource type="Script" uid="uid://kusx66qp424j" path="res://scripts/Unitry/BugAntlers.gd" id="2_u7ml4"]
+[ext_resource type="Script" uid="uid://cnsx1h0ov7o8x" path="res://scripts/Skills/S_Order.gd" id="3_u7ml4"]
+[ext_resource type="Resource" uid="uid://dh4gdf76cnodj" path="res://configs/SkillConfigs/BugAntlers/OrderStats.tres" id="4_tu2bm"]
+
+[sub_resource type="Animation" id="Animation_83dmu"]
+resource_name = "Act_Order"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PsychBlast"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:act_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vquue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:act_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vquue"]
+_data = {
+&"Act_Order": SubResource("Animation_83dmu"),
+&"RESET": SubResource("Animation_vquue")
+}
+
+[node name="BugAntlers" unique_id=283609770 instance=ExtResource("1_04v54")]
+script = ExtResource("2_u7ml4")
+
+[node name="Act" type="AnimationPlayer" parent="." index="3" unique_id=1317837324]
+root_node = NodePath("../Skills/Order")
+libraries/ = SubResource("AnimationLibrary_vquue")
+
+[node name="Order" type="Node" parent="Skills" parent_id_path=PackedInt32Array(1686492101) index="0" unique_id=1714795644]
+script = ExtResource("3_u7ml4")
+stats = ExtResource("4_tu2bm")
+metadata/_custom_type_script = "uid://yq1lml5sofbw"

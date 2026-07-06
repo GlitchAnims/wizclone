@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyd2trdjktvmu"]
+
+[ext_resource type="PackedScene" uid="uid://bpubn6v3qskun" path="res://scenes/standin.tscn" id="1_bqi73"]
+[ext_resource type="Script" uid="uid://blhkt718c3skh" path="res://scripts/Unitry/BugAntlersStandin.gd" id="2_bj77d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bj77d"]
+viewport_path = NodePath("Status")
+
+[node name="BugAntlersStandin" instance=ExtResource("1_bqi73")]
+script = ExtResource("2_bj77d")
+
+[node name="StatusSprite" parent="GUI" index="0"]
+texture = SubResource("ViewportTexture_bj77d")

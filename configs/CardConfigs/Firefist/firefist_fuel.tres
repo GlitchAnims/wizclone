@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardConfig" format=3 uid="uid://bv8no428xt28y"]
+
+[ext_resource type="Script" uid="uid://jgd3xp47xwny" path="res://scripts/Configs/CardConfig.gd" id="1_njcka"]
+
+[resource]
+script = ExtResource("1_njcka")
+identifier = &"og_firefist_fuel"
+card_name = "Fuel"
+light_cost = 1
+color = Color(0, 0.70464826, 0.70566946, 1)
+metadata/_custom_type_script = "uid://jgd3xp47xwny"

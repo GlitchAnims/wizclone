@@ -1,0 +1,471 @@
+[gd_scene format=3 uid="uid://ne7wsul48ojw"]
+
+[ext_resource type="Script" uid="uid://dgh0cec8wivo" path="res://scripts/Stronghold.gd" id="1_mw8q0"]
+[ext_resource type="Script" uid="uid://bl4m2n6i335nw" path="res://scripts/Encompass.gd" id="2_hber8"]
+[ext_resource type="Script" uid="uid://t133ggsm20sb" path="res://scripts/Configs/UnitConfig.gd" id="2_ptabd"]
+[ext_resource type="Script" uid="uid://d2t127lkc868q" path="res://scripts/Gamespace.gd" id="3_eav5i"]
+[ext_resource type="Script" uid="uid://js26ljisydam" path="res://scripts/PlayerSpawner.gd" id="4_evvgm"]
+[ext_resource type="Resource" uid="uid://dstf7d2k7x2v0" path="res://configs/UnitConfigs/Firefist.tres" id="4_ptabd"]
+[ext_resource type="Resource" uid="uid://bro2yf3qe4t77" path="res://configs/UnitConfigs/BugAntlers.tres" id="4_v57l1"]
+[ext_resource type="Script" uid="uid://si2wavx52a60" path="res://scripts/VisualManagement.gd" id="6_2yxuj"]
+[ext_resource type="Texture2D" uid="uid://dguov6ian7xin" path="res://sprites/Mouse/loadcircle.png" id="6_umgfj"]
+[ext_resource type="StyleBox" uid="uid://5xjooewjqtna" path="res://styles/statusbarbg_hp.tres" id="7_j3ji8"]
+[ext_resource type="StyleBox" uid="uid://cbu14tj1b72gv" path="res://styles/statusbar_hp.tres" id="8_cf4id"]
+[ext_resource type="StyleBox" uid="uid://bu67wnmra0jvy" path="res://styles/statusbarbg_sp.tres" id="9_1v5lc"]
+[ext_resource type="Texture2D" uid="uid://banp51eab3p01" path="res://icon.svg" id="10_1v5lc"]
+[ext_resource type="StyleBox" uid="uid://duj2quikybabc" path="res://styles/statusbar_sp.tres" id="10_umgfj"]
+[ext_resource type="PackedScene" uid="uid://iwik01vij4rv" path="res://scenes/HUD/hud_card.tscn" id="15_i5rp2"]
+[ext_resource type="Script" uid="uid://ce3gtqpcr3k46" path="res://scripts/HUD/HandHUD.gd" id="15_v57l1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2yxuj"]
+top_radius = 0.4
+height = 0.001
+radial_segments = 4
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j3ji8"]
+top_radius = 0.3
+bottom_radius = 0.35
+height = 0.001
+radial_segments = 32
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_1v5lc"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.171171, 0.369369, 1)
+colors = PackedColorArray(1, 1, 1, 0.733333, 1, 1, 1, 0.157801, 1, 1, 1, 0.0225835, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_umgfj"]
+gradient = SubResource("Gradient_1v5lc")
+width = 16
+fill = 1
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j02l2"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cf4id"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v5lc"]
+bg_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="Stronghold" type="Node" unique_id=495344873]
+script = ExtResource("1_mw8q0")
+og_unitry = Array[ExtResource("2_ptabd")]([ExtResource("4_v57l1"), ExtResource("4_ptabd")])
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=874524148]
+_spawnable_scenes = PackedStringArray("uid://7u5rpxdcfusb")
+spawn_path = NodePath(".")
+script = ExtResource("4_evvgm")
+
+[node name="MapSpawner" type="MultiplayerSpawner" parent="." unique_id=1450200937]
+_spawnable_scenes = PackedStringArray("uid://bnvxou856dhfv")
+spawn_path = NodePath("../Gamespace")
+
+[node name="Gamespace" type="Node3D" parent="." unique_id=963668178]
+script = ExtResource("3_eav5i")
+metadata/_custom_type_script = "uid://d2t127lkc868q"
+
+[node name="UnitSpawner" type="MultiplayerSpawner" parent="Gamespace" unique_id=1175697082]
+spawn_path = NodePath("../Unitry")
+
+[node name="Unitry" type="Node3D" parent="Gamespace" unique_id=1830807825]
+
+[node name="VisualManagement" type="Node3D" parent="." unique_id=1438869793]
+script = ExtResource("6_2yxuj")
+
+[node name="THECamera" type="Camera3D" parent="VisualManagement" unique_id=674794322]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.65214, 6.99713)
+current = true
+
+[node name="MouseMarker" type="Node3D" parent="VisualManagement" unique_id=1763974144]
+visible = false
+
+[node name="FloorSquare" type="MeshInstance3D" parent="VisualManagement/MouseMarker" unique_id=467150790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0366637, 0)
+mesh = SubResource("CylinderMesh_2yxuj")
+
+[node name="MouseMarkerUnit" type="Node3D" parent="VisualManagement" unique_id=535114666]
+visible = false
+
+[node name="FloorSquare" type="MeshInstance3D" parent="VisualManagement/MouseMarkerUnit" unique_id=1970895796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0366637, 0)
+mesh = SubResource("CylinderMesh_j3ji8")
+
+[node name="AimMarker" type="Node3D" parent="VisualManagement" unique_id=1235561637]
+visible = false
+
+[node name="Lineout" type="Sprite3D" parent="VisualManagement/AimMarker" unique_id=1658767219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 8.76, 0, 0.01, -2.8156)
+axis = 1
+double_sided = false
+texture = SubResource("GradientTexture2D_umgfj")
+region_enabled = true
+region_rect = Rect2(0, 1, 16, 64)
+
+[node name="Encompass" type="PanelContainer" parent="." unique_id=1532195454]
+offset_right = 717.0
+offset_bottom = 480.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_j02l2")
+script = ExtResource("2_hber8")
+metadata/_edit_lock_ = true
+
+[node name="AllMouse" type="Node2D" parent="Encompass" unique_id=1769419250]
+
+[node name="SkillChargeCircle" type="TextureProgressBar" parent="Encompass/AllMouse" unique_id=1833117899]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.15, 0.15)
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 4
+texture_progress = ExtResource("6_umgfj")
+texture_progress_offset = Vector2(-128, -128)
+tint_progress = Color(1, 1, 1, 0.784314)
+
+[node name="CombatHUD" type="Control" parent="Encompass" unique_id=880239077]
+layout_mode = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="HealthHUD" type="Control" parent="Encompass/CombatHUD" unique_id=1970023222]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 307.0
+offset_bottom = 108.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Encompass/CombatHUD/HealthHUD" unique_id=1181516909]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 30.0
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/background = ExtResource("7_j3ji8")
+theme_override_styles/fill = ExtResource("8_cf4id")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+rounded = true
+show_percentage = false
+
+[node name="SanityBar" type="ProgressBar" parent="Encompass/CombatHUD/HealthHUD" unique_id=920791814]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_top = 33.0
+offset_right = 270.0
+offset_bottom = 58.0
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/background = ExtResource("9_1v5lc")
+theme_override_styles/fill = ExtResource("10_umgfj")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+rounded = true
+show_percentage = false
+
+[node name="HP" type="RichTextLabel" parent="Encompass/CombatHUD/HealthHUD" unique_id=218112263]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 0
+offset_left = 195.0
+offset_top = -4.0
+offset_right = 295.0
+offset_bottom = 36.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font size=22]70[/font].[font size=16]0[/font]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SP" type="RichTextLabel" parent="Encompass/CombatHUD/HealthHUD" unique_id=1382638483]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 0
+offset_left = 187.0
+offset_top = 30.0
+offset_right = 267.0
+offset_bottom = 60.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[color=bbe2e4][font size=20]99[/font].[font size=15]9[/font] %"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="EnergyHUD" type="Control" parent="Encompass/CombatHUD" unique_id=750629680]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 108.0
+grow_horizontal = 0
+pivot_offset = Vector2(300, 0)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Energy1Dot" type="Control" parent="Encompass/CombatHUD/EnergyHUD" unique_id=232083093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -268.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Energy1Bar" type="ProgressBar" parent="Encompass/CombatHUD/EnergyHUD/Energy1Dot" unique_id=1394188716]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cf4id")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1v5lc")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+rounded = true
+fill_mode = 1
+show_percentage = false
+
+[node name="Energy1" type="RichTextLabel" parent="Encompass/CombatHUD/EnergyHUD/Energy1Dot" unique_id=1468409755]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 0
+offset_left = 17.0
+offset_top = -11.0
+offset_right = 117.0
+offset_bottom = 29.0
+mouse_filter = 2
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[font size=20]70[/font].[font size=15]0[/font] %"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Energy1Name" type="RichTextLabel" parent="Encompass/CombatHUD/EnergyHUD/Energy1Dot" unique_id=25961479]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 0
+offset_left = 69.0
+offset_top = -10.0
+offset_right = 243.0
+offset_bottom = 30.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "Stored Blood"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Energy1Icon" type="TextureRect" parent="Encompass/CombatHUD/EnergyHUD/Energy1Dot" unique_id=2061072264]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 268.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource("10_1v5lc")
+expand_mode = 1
+
+[node name="Energy2Dot" type="Control" parent="Encompass/CombatHUD/EnergyHUD" unique_id=1238248485]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -268.0
+offset_top = 22.0
+offset_bottom = 43.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Energy2Bar" type="ProgressBar" parent="Encompass/CombatHUD/EnergyHUD/Energy2Dot" unique_id=1669420645]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cf4id")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1v5lc")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+rounded = true
+fill_mode = 1
+show_percentage = false
+
+[node name="Energy2" type="RichTextLabel" parent="Encompass/CombatHUD/EnergyHUD/Energy2Dot" unique_id=1238956787]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 0
+offset_left = 17.0
+offset_top = -11.0
+offset_right = 117.0
+offset_bottom = 29.0
+mouse_filter = 2
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[font size=20]70[/font].[font size=15]0[/font] %"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Energy2Name" type="RichTextLabel" parent="Encompass/CombatHUD/EnergyHUD/Energy2Dot" unique_id=1678494703]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 0
+offset_left = 69.0
+offset_top = -10.0
+offset_right = 243.0
+offset_bottom = 30.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "Stored Blood"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Energy2Icon" type="TextureRect" parent="Encompass/CombatHUD/EnergyHUD/Energy2Dot" unique_id=1447545976]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 268.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource("10_1v5lc")
+expand_mode = 1
+
+[node name="LightHUD" type="Control" parent="Encompass/CombatHUD" unique_id=426565680]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -219.0
+offset_right = 224.0
+offset_bottom = -164.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="LightLoading" type="TextureProgressBar" parent="Encompass/CombatHUD/LightHUD" unique_id=874351766]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -36.0
+offset_right = 273.0
+offset_bottom = 220.0
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 4
+texture_progress = ExtResource("6_umgfj")
+texture_progress_offset = Vector2(-128, -128)
+tint_progress = Color(1, 1, 1, 0.784314)
+
+[node name="Light" type="RichTextLabel" parent="Encompass/CombatHUD/LightHUD" unique_id=79933801]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -56.0
+offset_right = 68.0
+offset_bottom = -16.0
+grow_vertical = 0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font size=22]5[/font]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LightMax" type="RichTextLabel" parent="Encompass/CombatHUD/LightHUD" unique_id=1384047267]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -51.0
+offset_right = 136.0
+offset_bottom = -11.0
+grow_vertical = 0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font size=28]/[/font][font size=18]10[/font]"
+vertical_alignment = 1
+
+[node name="HandHUD" type="Control" parent="Encompass/CombatHUD" unique_id=356879006]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -169.0
+offset_right = 403.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("15_v57l1")
+
+[node name="HBox1" type="HBoxContainer" parent="Encompass/CombatHUD/HandHUD" unique_id=2016987467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="HUDCardPlaceholder" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=1908192734 instance=ExtResource("15_i5rp2")]
+layout_mode = 2
+
+[node name="HUDCardPlaceholder2" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=505570178 instance=ExtResource("15_i5rp2")]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="Encompass" unique_id=1387194635]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
+
+[node name="VBox1" type="VBoxContainer" parent="Encompass/HBox1" unique_id=1770419623]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
+
+[node name="VBox2" type="VBoxContainer" parent="Encompass/HBox1" unique_id=488966408]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+metadata/_edit_lock_ = true

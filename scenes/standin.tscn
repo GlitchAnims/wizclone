@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bpubn6v3qskun"]
+
+[ext_resource type="Script" uid="uid://b68oxi22og82h" path="res://scripts/Standin.gd" id="1_q4fsp"]
+[ext_resource type="PackedScene" uid="uid://ddyut8slaoy2m" path="res://scenes/unitstatus.tscn" id="2_k13sh"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q4fsp"]
+top_radius = 0.4
+height = 0.05
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4fsp"]
+radius = 0.3
+height = 1.0
+radial_segments = 12
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q4fsp"]
+viewport_path = NodePath("Status")
+
+[node name="Standin" type="Node3D" unique_id=1477708893 node_paths=PackedStringArray("UnitStatus_Node")]
+script = ExtResource("1_q4fsp")
+UnitStatus_Node = NodePath("Status/UnitStatus")
+
+[node name="Footcircle" type="MeshInstance3D" parent="." unique_id=1516462348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("CylinderMesh_q4fsp")
+
+[node name="Capsule" type="MeshInstance3D" parent="." unique_id=1988859282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.524487, 0)
+mesh = SubResource("CapsuleMesh_q4fsp")
+
+[node name="GUI" type="Node3D" parent="." unique_id=805633590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00674, 0)
+
+[node name="StatusSprite" type="Sprite3D" parent="GUI" unique_id=951659558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657742, 0)
+pixel_size = 0.007
+texture = SubResource("ViewportTexture_q4fsp")
+region_enabled = true
+region_rect = Rect2(0, 0, 199, 85)
+
+[node name="Status" type="SubViewport" parent="." unique_id=1349212353]
+transparent_bg = true
+size = Vector2i(200, 86)
+
+[node name="UnitStatus" parent="Status" unique_id=761107046 instance=ExtResource("2_k13sh")]

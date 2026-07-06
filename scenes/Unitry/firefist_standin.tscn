@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dc6qafh08824x"]
+
+[ext_resource type="PackedScene" uid="uid://bpubn6v3qskun" path="res://scenes/standin.tscn" id="1_rch47"]
+[ext_resource type="Script" uid="uid://cevj4r3pd200e" path="res://scripts/Unitry/FirefistStandin.gd" id="2_de6yq"]
+[ext_resource type="SpriteFrames" uid="uid://eitjhismfum" path="res://sprites/UnitSprites/Firefist/firefist_spriteframes.tres" id="3_8wn5u"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iy4j3"]
+viewport_path = NodePath("Status")
+
+[node name="Standin" unique_id=58794335 instance=ExtResource("1_rch47")]
+script = ExtResource("2_de6yq")
+
+[node name="Capsule" parent="." index="1" unique_id=1988859282]
+visible = false
+
+[node name="StatusSprite" parent="GUI" parent_id_path=PackedInt32Array(805633590) index="0" unique_id=951659558]
+texture = SubResource("ViewportTexture_iy4j3")
+
+[node name="GegorSprite" type="AnimatedSprite3D" parent="." index="4" unique_id=137290319]
+offset = Vector2(0, 215)
+pixel_size = 0.003
+billboard = 2
+sprite_frames = ExtResource("3_8wn5u")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardConfig" format=3 uid="uid://c61cc7xopvdb1"]
+
+[ext_resource type="Script" uid="uid://fvj7fd1nwjat" path="res://scripts/CardScripts/UnusedCardScript.gd" id="1_35k71"]
+[ext_resource type="Script" uid="uid://jgd3xp47xwny" path="res://scripts/Configs/CardConfig.gd" id="1_njyds"]
+
+[resource]
+script = ExtResource("1_njyds")
+identifier = &"og_firefist_flamethrow"
+card_name = "Flamethrow"
+optional_card_script = ExtResource("1_35k71")
+light_cost = 2
+color = Color(0.79370433, 0.3943841, 0.14813566, 1)
+metadata/_custom_type_script = "uid://jgd3xp47xwny"

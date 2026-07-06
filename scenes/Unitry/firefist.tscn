@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bxmah6c5yw7x5"]
+
+[ext_resource type="PackedScene" uid="uid://bx6iy0abyupfe" path="res://scenes/unit.tscn" id="1_jh4pb"]
+[ext_resource type="Script" uid="uid://boxfa581gyqps" path="res://scripts/Unitry/Firefist.gd" id="2_wpq0h"]
+[ext_resource type="Resource" uid="uid://bro2yf3qe4t77" path="res://configs/UnitConfigs/BugAntlers.tres" id="3_r3vc8"]
+
+[node name="Unit" unique_id=1610881032 instance=ExtResource("1_jh4pb")]
+script = ExtResource("2_wpq0h")
+config_ref = ExtResource("3_r3vc8")

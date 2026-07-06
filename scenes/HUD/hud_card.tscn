@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://iwik01vij4rv"]
+
+[ext_resource type="Script" uid="uid://o1pnl3aha754" path="res://scripts/HUD/HUDCard.gd" id="1_knhpx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knhpx"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vesgh"]
+
+[node name="HUDCard" type="PanelContainer" unique_id=1908192734]
+custom_minimum_size = Vector2(20, 100)
+offset_right = 20.0
+offset_bottom = 100.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_knhpx")
+script = ExtResource("1_knhpx")
+metadata/_edit_lock_ = true
+
+[node name="DecoPanel" type="Panel" parent="." unique_id=362442552]
+custom_minimum_size = Vector2(20, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vesgh")
+
+[node name="CardName" type="RichTextLabel" parent="DecoPanel" unique_id=422728718]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -37.0
+offset_right = 85.104675
+offset_bottom = -17.193787
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 10
+text = "Flamethrow"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LightCost" type="RichTextLabel" parent="DecoPanel" unique_id=750777421]
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 10
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountInHand" type="RichTextLabel" parent="DecoPanel" unique_id=1385782187]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -20.0
+offset_right = 18.0
+offset_bottom = 4.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 10
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountInDiscard" type="RichTextLabel" parent="DecoPanel" unique_id=1943714904]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -21.0
+offset_right = 8.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 10
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

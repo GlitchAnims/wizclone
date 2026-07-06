@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bx6iy0abyupfe"]
+
+[ext_resource type="Script" uid="uid://b0ykym1txudf3" path="res://scripts/Unit.gd" id="1_o7ajc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k673f"]
+height = 1.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o7ajc"]
+properties/0/path = NodePath(".:unitID")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:pilotID_ref")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:hp_max")
+properties/2/spawn = true
+properties/2/replication_mode = 0
+properties/3/path = NodePath(".:hp")
+properties/3/spawn = true
+properties/3/replication_mode = 0
+properties/4/path = NodePath(".:energy1")
+properties/4/spawn = true
+properties/4/replication_mode = 0
+properties/5/path = NodePath(".:energy2")
+properties/5/spawn = true
+properties/5/replication_mode = 0
+properties/6/path = NodePath(".:skill_selected_i")
+properties/6/spawn = true
+properties/6/replication_mode = 0
+properties/7/path = NodePath(".:sanity")
+properties/7/spawn = true
+properties/7/replication_mode = 0
+properties/8/path = NodePath(".:pile_hand")
+properties/8/spawn = true
+properties/8/replication_mode = 0
+properties/9/path = NodePath(".:pile_discard")
+properties/9/spawn = true
+properties/9/replication_mode = 0
+properties/10/path = NodePath(".:light_max")
+properties/10/spawn = true
+properties/10/replication_mode = 0
+properties/11/path = NodePath(".:light")
+properties/11/spawn = true
+properties/11/replication_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7ajc"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="Unit" type="CharacterBody3D" unique_id=1275895325]
+collision_mask = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_o7ajc")
+metadata/_custom_type_script = "uid://b0ykym1txudf3"
+
+[node name="ColShape" type="CollisionShape3D" parent="." unique_id=667037343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_k673f")
+
+[node name="SetupSync" type="MultiplayerSynchronizer" parent="." unique_id=125540850]
+replication_config = SubResource("SceneReplicationConfig_o7ajc")
+visibility_update_mode = 2
+
+[node name="RepulsionArea" type="Area3D" parent="." unique_id=258701691]
+collision_layer = 4
+collision_mask = 4
+
+[node name="ColShape" type="CollisionShape3D" parent="RepulsionArea" unique_id=202425799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_o7ajc")
+
+[node name="Skills" type="Node" parent="." unique_id=1686492101]
+
+[node name="Deck" type="Node" parent="." unique_id=1512092553]
+
+[node name="Nav" type="NavigationAgent3D" parent="." unique_id=857297883]

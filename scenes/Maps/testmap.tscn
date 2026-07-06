@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnvxou856dhfv"]
+
+[ext_resource type="Script" uid="uid://bnx7mwrbpm1qt" path="res://scripts/Maps/TestMap.gd" id="1_ay4ga"]
+
+[sub_resource type="Gradient" id="Gradient_ay4ga"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wem4m"]
+gradient = SubResource("Gradient_ay4ga")
+fill_to = Vector2(0.0503145, 0.0597484)
+repeat = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8udil"]
+albedo_texture = SubResource("GradientTexture2D_wem4m")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ay4ga"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ay4ga"]
+friction = 0.5
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay4ga"]
+size = Vector3(50, 1, 50)
+
+[node name="TestMap" type="Node3D"]
+script = ExtResource("1_ay4ga")
+
+[node name="CUBEFLOOR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_8udil")
+mesh = SubResource("BoxMesh_ay4ga")
+
+[node name="FloorCol" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_ay4ga")
+
+[node name="ColShape" type="CollisionShape3D" parent="FloorCol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ay4ga")

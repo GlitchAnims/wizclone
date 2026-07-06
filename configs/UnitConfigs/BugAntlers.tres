@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitConfig" format=3 uid="uid://bro2yf3qe4t77"]
+
+[ext_resource type="Script" uid="uid://t133ggsm20sb" path="res://scripts/Configs/UnitConfig.gd" id="1_7588c"]
+[ext_resource type="Script" uid="uid://jgd3xp47xwny" path="res://scripts/Configs/CardConfig.gd" id="1_qitx5"]
+[ext_resource type="Texture2D" uid="uid://banp51eab3p01" path="res://icon.svg" id="2_3ukly"]
+[ext_resource type="PackedScene" uid="uid://dprf3ecs74f6i" path="res://scenes/Unitry/bugantlers.tscn" id="2_7588c"]
+[ext_resource type="PackedScene" uid="uid://dyd2trdjktvmu" path="res://scenes/Unitry/bugantlers_standin.tscn" id="4_10krr"]
+
+[resource]
+script = ExtResource("1_7588c")
+identifier = &"og_bugantlers"
+unit_name = "Clara"
+unit_scene = ExtResource("2_7588c")
+standin_scene = ExtResource("4_10krr")
+metadata/_custom_type_script = "uid://t133ggsm20sb"
