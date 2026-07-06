@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://banp51eab3p01" path="res://icon.svg" id="2_s1kvm"]
 [ext_resource type="Resource" uid="uid://c61cc7xopvdb1" path="res://configs/CardConfigs/Firefist/firefist_flamethrow.tres" id="3_3pq3y"]
 [ext_resource type="PackedScene" uid="uid://bxmah6c5yw7x5" path="res://scenes/Unitry/firefist.tscn" id="4_2gmfu"]
+[ext_resource type="Resource" uid="uid://cckjmssvgn837" path="res://configs/CardConfigs/Firefist/firefist_firefist.tres" id="4_gnm4s"]
 [ext_resource type="PackedScene" uid="uid://dc6qafh08824x" path="res://scenes/Unitry/firefist_standin.tscn" id="4_s1kvm"]
 
 [resource]
@@ -14,9 +15,10 @@ identifier = &"og_firefist"
 unit_name = "Firefist"
 unit_scene = ExtResource("4_2gmfu")
 standin_scene = ExtResource("4_s1kvm")
-cardconfig_default_list = Array[ExtResource("1_p3qxt")]([ExtResource("2_2gmfu"), ExtResource("3_3pq3y")])
+cardconfig_default_list = Array[ExtResource("1_p3qxt")]([ExtResource("2_2gmfu"), ExtResource("3_3pq3y"), ExtResource("4_gnm4s")])
 default_card_pool = Dictionary[ExtResource("1_p3qxt"), int]({
-ExtResource("2_2gmfu"): 3,
-ExtResource("3_3pq3y"): 2
+ExtResource("2_2gmfu"): 4,
+ExtResource("3_3pq3y"): 3,
+ExtResource("4_gnm4s"): 3
 })
 metadata/_custom_type_script = "uid://t133ggsm20sb"

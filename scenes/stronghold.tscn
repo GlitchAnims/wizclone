@@ -9,11 +9,11 @@
 [ext_resource type="Resource" uid="uid://bro2yf3qe4t77" path="res://configs/UnitConfigs/BugAntlers.tres" id="4_v57l1"]
 [ext_resource type="Script" uid="uid://si2wavx52a60" path="res://scripts/VisualManagement.gd" id="6_2yxuj"]
 [ext_resource type="Texture2D" uid="uid://dguov6ian7xin" path="res://sprites/Mouse/loadcircle.png" id="6_umgfj"]
-[ext_resource type="StyleBox" uid="uid://5xjooewjqtna" path="res://styles/statusbarbg_hp.tres" id="7_j3ji8"]
-[ext_resource type="StyleBox" uid="uid://cbu14tj1b72gv" path="res://styles/statusbar_hp.tres" id="8_cf4id"]
 [ext_resource type="StyleBox" uid="uid://bu67wnmra0jvy" path="res://styles/statusbarbg_sp.tres" id="9_1v5lc"]
 [ext_resource type="Texture2D" uid="uid://banp51eab3p01" path="res://icon.svg" id="10_1v5lc"]
 [ext_resource type="StyleBox" uid="uid://duj2quikybabc" path="res://styles/statusbar_sp.tres" id="10_umgfj"]
+[ext_resource type="StyleBox" uid="uid://dq5yv1ioniuv7" path="res://styles/statusbarbg_draw.tres" id="10_v57l1"]
+[ext_resource type="StyleBox" uid="uid://b3hbad74826hc" path="res://styles/statusbar_draw.tres" id="11_rry8n"]
 [ext_resource type="PackedScene" uid="uid://iwik01vij4rv" path="res://scenes/HUD/hud_card.tscn" id="15_i5rp2"]
 [ext_resource type="Script" uid="uid://ce3gtqpcr3k46" path="res://scripts/HUD/HandHUD.gd" id="15_v57l1"]
 
@@ -56,6 +56,12 @@ bg_color = Color(0, 0, 0, 0.392157)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v5lc"]
 bg_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v57l1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v57l1"]
+corner_radius_bottom_left = 16
+corner_detail = 1
 
 [node name="Stronghold" type="Node" unique_id=495344873]
 script = ExtResource("1_mw8q0")
@@ -155,8 +161,8 @@ offset_right = 300.0
 offset_bottom = 30.0
 size_flags_vertical = 1
 mouse_filter = 2
-theme_override_styles/background = ExtResource("7_j3ji8")
-theme_override_styles/fill = ExtResource("8_cf4id")
+theme_override_styles/background = ExtResource("10_v57l1")
+theme_override_styles/fill = ExtResource("11_rry8n")
 max_value = 1000.0
 step = 1.0
 value = 700.0
@@ -444,10 +450,95 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="HUDCardPlaceholder" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=1908192734 instance=ExtResource("15_i5rp2")]
+[node name="Drawhud" type="VBoxContainer" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=573182293]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="DrawBox" type="Panel" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud" unique_id=1070128832]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("10_v57l1")
+
+[node name="DrawText" type="RichTextLabel" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud/DrawBox" unique_id=27762871]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 1.0
+offset_right = 115.0
+offset_bottom = 31.0
+grow_horizontal = 0
+rotation = 1.5707941
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 14
+text = "Draw Card"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawMeter" type="ProgressBar" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud/DrawBox" unique_id=243586173]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_v57l1")
+theme_override_styles/fill = ExtResource("11_rry8n")
+max_value = 1.0
+value = 0.37
+fill_mode = 3
+show_percentage = false
+
+[node name="HandsizePanel" type="Panel" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud" unique_id=86867331]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_styles/panel = SubResource("StyleBoxFlat_v57l1")
+metadata/_edit_lock_ = true
+
+[node name="MaxHand" type="RichTextLabel" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud/HandsizePanel" unique_id=604164252]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 10
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpaceRemaining" type="RichTextLabel" parent="Encompass/CombatHUD/HandHUD/HBox1/Drawhud/HandsizePanel" unique_id=518063687]
+layout_mode = 1
+offset_right = 30.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 19
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minicards" type="HBoxContainer" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=1898179159]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="HUDCardPlaceholder" parent="Encompass/CombatHUD/HandHUD/HBox1/Minicards" unique_id=1908192734 instance=ExtResource("15_i5rp2")]
 layout_mode = 2
 
-[node name="HUDCardPlaceholder2" parent="Encompass/CombatHUD/HandHUD/HBox1" unique_id=505570178 instance=ExtResource("15_i5rp2")]
+[node name="HUDCardPlaceholder2" parent="Encompass/CombatHUD/HandHUD/HBox1/Minicards" unique_id=1885795388 instance=ExtResource("15_i5rp2")]
 layout_mode = 2
 
 [node name="HBox1" type="HBoxContainer" parent="Encompass" unique_id=1387194635]

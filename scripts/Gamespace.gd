@@ -5,7 +5,8 @@ class_name Gamespace extends Node3D
 
 const basemap_scene: PackedScene = preload("res://scenes/Maps/testmap.tscn")
 func InitMultiplayer() -> void:
-	add_child(basemap_scene.instantiate())
+	if not GameData.isServer: return
+	add_child(basemap_scene.instantiate(), true)
 
 var _interval: float = 0
 func _physics_process(delta: float) -> void:
@@ -18,7 +19,6 @@ func _physics_process(delta: float) -> void:
 
 func _SlowTick() -> void:
 	if not GameData.isServer: return
-	
 	for key in GameData.playerDict:
 		var player: Player = GameData.playerDict[key]
 		if not is_instance_valid(player.unit_ref):

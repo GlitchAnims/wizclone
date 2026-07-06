@@ -31,7 +31,7 @@ func add_player(id: int):
 	player.password = secretPass
 	player.pilotID = GameData.GetUniquePilotID()
 	add_child(player, true)
-	Authority_GivePassword.rpc_id(id, secretPass)
+	#Authority_GivePassword.rpc_id(id, secretPass)
 	
 	#var spawnPos: Vector3 = Vector3(ClientData.rng.randf_range(-5.0,5.0), 0.0, ClientData.rng.randf_range(-5.0,5.0))
 

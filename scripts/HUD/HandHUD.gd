@@ -1,14 +1,24 @@
 class_name HandHUD extends Control
 
-
 const hudcard_scene: PackedScene = preload("res://scenes/HUD/hud_card.tscn")
-@onready var CardHolder_Node: HBoxContainer = $"HBox1"
+
+
+@onready var _DrawBox_Node: Panel = $"HBox1/Drawhud/DrawBox"
+@onready var _DrawMeter_Node: ProgressBar = $"HBox1/Drawhud/DrawBox/DrawMeter"
+@onready var _DrawText_Label: RichTextLabel = $"HBox1/Drawhud/DrawBox/DrawText"
+
+@onready var _MaxHand_Label: RichTextLabel = $"HBox1/Drawhud/HandsizePanel/MaxHand"
+@onready var _SpaceRemaining_Label: RichTextLabel = $"HBox1/Drawhud/HandsizePanel/SpaceRemaining"
+
+@onready var CardHolder_Node: HBoxContainer = $"HBox1/Minicards"
 var hudcard_dict: Dictionary[int, HUDCard] = {}
 
 func _ready() -> void:
 	for child in CardHolder_Node.get_children():
 		child.queue_free()
 
+func _process_handhud(unit: Unit) -> void:
+	_DrawMeter_Node.set_value(unit.timer_draw)
 
 func UpdateHandVisual(unit: Unit) -> void:
 	var cardset: Dictionary[int, Vector2i] = {}
@@ -45,3 +55,11 @@ func UpdateHandVisual(unit: Unit) -> void:
 	for id in destroy_list:
 		hudcard_dict[id].queue_free()
 		hudcard_dict.erase(id)
+	
+	var cardcount: int = unit.pile_hand.size()
+	var maxhand: int = unit.config_ref.default_hand_max
+	_MaxHand_Label.set_text(str(maxhand))
+	_SpaceRemaining_Label.set_text(str(maxhand-cardcount))
+	
+	if cardcount >= maxhand: _DrawText_Label.set_text("Hand Full")
+	else: _DrawText_Label.set_text("Draw Card")

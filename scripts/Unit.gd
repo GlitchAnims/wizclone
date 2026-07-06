@@ -8,6 +8,7 @@ class_name Unit extends CharacterBody3D
 var pilot_ref: Pilot = null
 @export var pilotID_ref: int = -1
 
+@export var unitidentifier = &""
 var config_ref: UnitConfig = null
 var tibia_ref: UnitTibia = null
 
@@ -61,6 +62,10 @@ var intent: int = 0
 func _ready() -> void:
 	_interval -= ClientData.rng.randf()
 	
+	if not GameData.isServer:
+		if not is_instance_valid(tibia_ref): tibia_ref = GameData.tibiadict_unitry[unitidentifier]
+		if not is_instance_valid(config_ref): config_ref = tibia_ref.config_ref
+	
 	var skillnodelist: Array[Node] = Skills_Node.get_children()
 	for node in skillnodelist:
 		if node is Skill:
@@ -93,24 +98,29 @@ func _physics_process(delta: float) -> void:
 		fulltime = not fulltime
 		_SlowTick(delta)
 	
-	if light < light_max: timer_light += delta
+	var thres_l: float = config_ref.default_light_regen
+	var thres_d: float = config_ref.default_card_regen
+	
+	if light < light_max:
+		var regen: float = delta / thres_l
+		timer_light += regen
 	else: timer_light = 0
 	
 	var hand_count: int = pile_hand.size()
 	var discard_count: int = pile_discard.size()
-	if hand_count < config_ref.default_hand_max and discard_count > 0: timer_draw += delta
+	if hand_count < config_ref.default_hand_max and discard_count > 0:
+		var regen: float = delta / thres_d
+		timer_draw += regen
 	else: timer_draw = 0
 	
 	if GameData.isServer:
-		var thres_l: float = config_ref.default_light_regen
-		var thres_d: float = config_ref.default_card_regen
-		if timer_light >= thres_l:
+		if timer_light >= 1.0:
 			synctick = true
-			timer_light -= thres_l
+			timer_light -= 1.0
 			light += 1
 		
-		if timer_draw >= thres_d:
-			timer_draw -= thres_d
+		if timer_draw >= 1.0:
+			timer_draw -= 1.0
 			DrawCards(1)
 	
 	var isFloored: bool = is_on_floor()
@@ -184,7 +194,7 @@ func _physics_process(delta: float) -> void:
 	
 	if GameData.isServer and synctick:
 		synctick = false
-		Authority_SyncDeck.rpc(light, pile_hand, pile_discard)
+		Authority_SyncDeck.rpc(timer_light, timer_draw, light, pile_hand, pile_discard)
 		GameData.sig_updatehandvisual.emit()
 		Authority_SyncVecs.rpc(position, velocity)
 	
@@ -235,10 +245,13 @@ func PilotCheck() -> void:
 		elif GameData.isServer: Authority_SetPilotIDRef.rpc(-1)
 
 @rpc("call_remote", "authority", "reliable", 1)
-func Authority_SyncDeck(l: int, h: PackedInt32Array, d: PackedInt32Array) -> void:
+func Authority_SyncDeck(timer_l: float, timer_d: float, l: int, h: PackedInt32Array, d: PackedInt32Array) -> void:
+	timer_light = timer_l
+	timer_draw = timer_d
 	light = l
 	pile_hand = h
 	pile_discard = d
+	GameData.sig_updatehandvisual.emit()
 @rpc("call_remote", "authority", "unreliable_ordered", 2)
 func Authority_SyncVecs(pos_new: Vector3, vel_new: Vector3) -> void:
 	position = pos_new

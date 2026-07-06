@@ -12,6 +12,7 @@ func _ready() -> void:
 	position = unit_ref.position
 	for skill in unit_ref.skill_list: skill.standin_ref = self
 	_ready_standin()
+	print(unit_ref.config_ref.unit_scene)
 func _ready_standin() -> void: pass
 
 func _process(delta: float) -> void:
