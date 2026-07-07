@@ -33,7 +33,12 @@ class_name Encompass extends PanelContainer
 func _ready() -> void:
 	ClientData.viewportSize_changed.connect(UpdateSize)
 	UpdateSize()
+	
+	ClientData.screenUnit_changed.connect(_ScreenUnitChanged)
 	GameData.sig_updatehandvisual.connect(UpdateHandVisual)
+
+func _ScreenUnitChanged() -> void:
+	pass
 
 func UpdateSize() -> void:
 	set_begin(Vector2.ZERO)
@@ -65,8 +70,8 @@ func _physics_process(delta: float) -> void:
 		if AllMouse_Node.visible: AllMouse_Node.visible = false
 		if CombatHUD_Node.visible: CombatHUD_Node.visible = false
 		return
-	var player: Player = ClientData.thisPlayer
-	var unit: Unit = player.unit_ref
+	
+	var unit: Unit = ClientData.screenUnit
 	var valid_unit: bool = is_instance_valid(unit)
 	AllMouse_Node.visible = valid_unit
 	CombatHUD_Node.visible = valid_unit

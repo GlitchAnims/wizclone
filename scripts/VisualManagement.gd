@@ -7,13 +7,18 @@ class_name VisualManagement extends Node3D
 
 func _ready() -> void:
 	GameData.VisualManagement_Node = self
+	ClientData.screenUnit_changed.connect(_ScreenUnitChanged)
+
+func _ScreenUnitChanged() -> void:
+	pass
 
 var zoom: float = 1.0
 func _process(delta: float) -> void:
 	if not is_instance_valid(ClientData.thisPlayer): return
 	var player: Player = ClientData.thisPlayer
-	var unit: Unit = player.unit_ref
+	var unit: Unit = ClientData.screenUnit
 	var valid_unit: bool = is_instance_valid(unit)
+	var is_controlled_unit: bool = valid_unit and unit == player.unit_ref
 	MouseMarker_Node.visible = valid_unit
 	MouseMarkerUnit_Node.visible = valid_unit
 	AimMarker_Node.visible = valid_unit
@@ -36,17 +41,19 @@ func _process(delta: float) -> void:
 	var final_vec: Vector3 = final_pos - THECamera_Node.position
 	THECamera_Node.position += final_vec * minf(delta * 8.0, 1.0)
 	
-	var space_state = get_world_3d().direct_space_state
-	var from: Vector3 = THECamera_Node.project_ray_origin(mousePos)
-	var to: Vector3 = THECamera_Node.global_position + THECamera_Node.project_ray_normal(mousePos) * 200.0
-	GameData.rayquery_wall.from = from
-	GameData.rayquery_wall.to = to
-	var result: Dictionary = space_state.intersect_ray(GameData.rayquery_wall)
-	if result:
-		player.mouse_worldPos = result.position
 	
-	MouseMarker_Node.position = player.mouse_worldPos
-	MouseMarkerUnit_Node.position = unit.mouse_worldPos
-	AimMarker_Node.position = unit.standin_ref.position
-	AimMarker_Node.transform = AimMarker_Node.transform.looking_at(player.mouse_worldPos)
+	if is_controlled_unit:
+		var space_state = get_world_3d().direct_space_state
+		var from: Vector3 = THECamera_Node.project_ray_origin(mousePos)
+		var to: Vector3 = THECamera_Node.global_position + THECamera_Node.project_ray_normal(mousePos) * 200.0
+		GameData.rayquery_wall.from = from
+		GameData.rayquery_wall.to = to
+		var result: Dictionary = space_state.intersect_ray(GameData.rayquery_wall)
+		if result:
+			player.mouse_worldPos = result.position
+		
+		MouseMarker_Node.position = player.mouse_worldPos
+		MouseMarkerUnit_Node.position = unit.mouse_worldPos
+		AimMarker_Node.position = unit.standin_ref.position
+		AimMarker_Node.transform = AimMarker_Node.transform.looking_at(player.mouse_worldPos)
 	

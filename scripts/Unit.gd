@@ -59,7 +59,11 @@ var synctick: bool = false
 var mouse_worldPos: Vector3 = Vector3.ZERO
 var intent: int = 0
 
+func _exit_tree() -> void:
+	GameData.unitDict.erase(unitID)
+
 func _ready() -> void:
+	GameData.unitDict[unitID] = self
 	_interval -= ClientData.rng.randf()
 	
 	if not GameData.isServer:

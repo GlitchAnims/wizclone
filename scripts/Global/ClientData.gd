@@ -1,6 +1,44 @@
 extends Node
 
 var thisPlayer: Player = null
+## Do not set this manually. Only Read.[br]Use [method ClientData.ChangeScreenUnit] to set.
+var screenUnit: Unit = null
+var is_spectating: bool = false
+## Emitted by successful [method ClientData.ChangeScreenUnit]
+signal screenUnit_changed
+
+#@rpc("call_remote", "any_peer", "reliable", 1)
+#func Request_ChangeScreenUnit(unit_ID: int) -> void:
+	#var playerID: int = multiplayer.get_remote_sender_id()
+	#var pilot: Pilot = GameData.playerDict.get(playerID)
+	#if not is_instance_valid(pilot): return # Player isn't fucking REALLL
+	#
+	## TODO conditional for allowing spectate
+	#
+	#Authority_R_ChangeScreenUnit.rpc_id(playerID, unit_ID)
+#
+#@rpc("call_remote", "authority", "reliable", 1)
+#func Authority_R_ChangeScreenUnit(unit_ID: int) -> void:
+	#if unit_ID < 0:
+		#screenUnit = null
+	#else:
+		#var unit: Unit = GameData.unitDict.get(unit_ID, null)
+		#if is_instance_valid(unit):
+			#screenUnit = unit
+
+## Call this to check if it's allowed.[br]
+## When Successful:[br]
+##- Sets [member ClientData.screenUnit][br]
+##- Emits [signal ClientData.screenUnit_changed]
+func ChangeScreenUnit(player: Player, unit: Unit) -> void:
+	if not is_instance_valid(player): return # Player isn't fucking REALLL
+	if not is_instance_valid(unit): return # Unit isn't fucking REALLL
+	
+	# TODO conditional for allowing spectate
+	
+	is_spectating = false
+	screenUnit = unit
+	screenUnit_changed.emit()
 
 var mousePos: Vector2 = Vector2.ZERO
 var mousePos_old: Vector2 = Vector2.ZERO

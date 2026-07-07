@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://7u5rpxdcfusb"]
+[gd_scene format=3 uid="uid://7u5rpxdcfusb"]
 
 [ext_resource type="Script" uid="uid://c6twfywct3r0u" path="res://scripts/Player.gd" id="1_3vyb7"]
 
@@ -16,9 +16,9 @@ properties/3/path = NodePath(".:intent")
 properties/3/spawn = true
 properties/3/replication_mode = 0
 
-[node name="Player" type="Node"]
+[node name="Player" type="Node" unique_id=1207075504]
 script = ExtResource("1_3vyb7")
 
-[node name="SetupSync" type="MultiplayerSynchronizer" parent="."]
+[node name="SetupSync" type="MultiplayerSynchronizer" parent="." unique_id=2083377558]
 replication_config = SubResource("SceneReplicationConfig_3vyb7")
 visibility_update_mode = 2

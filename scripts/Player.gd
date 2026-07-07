@@ -16,6 +16,8 @@ func _physics_process_pilot(_delta: float) -> void:
 	if multiplayer.multiplayer_peer.get_unique_id() != playerID: return
 	var hasControl: bool = is_instance_valid(unit_ref)
 	
+	if hasControl: ## TODO Proper systems
+		if ClientData.screenUnit != unit_ref: ClientData.ChangeScreenUnit(self, unit_ref)
 	#if hasControl:
 	#	if not unit_ref.mainCamera.is_current(): unit_ref.mainCamera.set_current(true)
 	#else: if not GameData.TestCameraNode.is_current(): GameData.TestCameraNode.set_current(true)
