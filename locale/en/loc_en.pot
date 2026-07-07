@@ -25,11 +25,23 @@ msgid "CARD_Firefist"
 msgstr ""
 
 #: locale/cardnames_og.gd:5
-msgid "CARD_Flamethrow"
+msgid "CARD_DESC_Firefist"
 msgstr ""
 
 #: locale/cardnames_og.gd:6
+msgid "CARD_Flamethrow"
+msgstr ""
+
+#: locale/cardnames_og.gd:7
+msgid "CARD_DESC_Flamethrow"
+msgstr ""
+
+#: locale/cardnames_og.gd:8
 msgid "CARD_D12Fuel"
+msgstr ""
+
+#: locale/cardnames_og.gd:9
+msgid "CARD_DESC_D12Fuel"
 msgstr ""
 
 msgid "wizclone"

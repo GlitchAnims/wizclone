@@ -5,6 +5,8 @@ class_name CardConfig extends Resource
 @export var identifier: StringName = &""
 ## Card Name
 @export var card_name: String = ""
+## Description
+@export var card_desc: String = ""
 ## If Generic, it's intended to be added to other units' decks mid-combat via special effects.
 @export var is_generic: bool = false
 ## Optional Card Script

@@ -30,12 +30,26 @@ msgid "CARD_Firefist"
 msgstr "Firefist"
 
 #: locale/cardnames_og.gd:5
+msgid "CARD_DESC_Firefist"
+msgstr "Super Fire Punch!!"
+
+#: locale/cardnames_og.gd:6
 msgid "CARD_Flamethrow"
 msgstr "Flamethrow"
 
-#: locale/cardnames_og.gd:6
+#: locale/cardnames_og.gd:7
+msgid "CARD_DESC_Flamethrow"
+msgstr "Flamethrow Skill"
+
+#: locale/cardnames_og.gd:8
 msgid "CARD_D12Fuel"
 msgstr "D12 Fuel"
+
+#: locale/cardnames_og.gd:9
+msgid "CARD_DESC_D12Fuel"
+msgstr ""
+"Usable during a Flamethrower Attack.\n"
+"Instantly extends the duration of a Flamethrower attack by 1.0s."
 
 msgid "wizclone"
 msgstr "Lethe Battler"
