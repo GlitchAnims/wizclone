@@ -25,5 +25,17 @@ msgstr "Hand Full"
 msgid "HAND_NOT_FULL_DRAWING"
 msgstr "Drawing Card"
 
+#: locale/cardnames_og.gd:4
+msgid "CARD_Firefist"
+msgstr "Firefist"
+
+#: locale/cardnames_og.gd:5
+msgid "CARD_Flamethrow"
+msgstr "Flamethrow"
+
+#: locale/cardnames_og.gd:6
+msgid "CARD_D12Fuel"
+msgstr "D12 Fuel"
+
 msgid "wizclone"
 msgstr "Lethe Battler"

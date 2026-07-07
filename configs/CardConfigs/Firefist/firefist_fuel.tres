@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_njcka")
 identifier = &"og_firefist_fuel"
-card_name = "Fuel"
+card_name = "CARD_D12Fuel"
 light_cost = 1
 color = Color(0, 0.70464826, 0.70566946, 1)
 metadata/_custom_type_script = "uid://jgd3xp47xwny"

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_njyds")
 identifier = &"og_firefist_flamethrow"
-card_name = "Flamethrow"
+card_name = "CARD_Flamethrow"
 optional_card_script = ExtResource("1_35k71")
 light_cost = 2
 color = Color(0.79370433, 0.3943841, 0.14813566, 1)

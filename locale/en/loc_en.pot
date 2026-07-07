@@ -1,5 +1,6 @@
 # LANGUAGE translation for wizclone for the following files:
 # res://scripts/HUD/HandHUD.gd
+# res://locale/cardnames_og.gd
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -17,6 +18,18 @@ msgstr ""
 
 #: scripts/HUD/HandHUD.gd:65
 msgid "HAND_NOT_FULL_DRAWING"
+msgstr ""
+
+#: locale/cardnames_og.gd:4
+msgid "CARD_Firefist"
+msgstr ""
+
+#: locale/cardnames_og.gd:5
+msgid "CARD_Flamethrow"
+msgstr ""
+
+#: locale/cardnames_og.gd:6
+msgid "CARD_D12Fuel"
 msgstr ""
 
 msgid "wizclone"

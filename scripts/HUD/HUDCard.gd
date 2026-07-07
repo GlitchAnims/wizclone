@@ -2,7 +2,7 @@ class_name HUDCard extends PanelContainer
 
 var tibia_ref: CardTibia = null
 @onready var _Anim_Node: AnimationPlayer = $"Anim"
-@onready var _DecoPanel_Node: Panel = $"DecoPanel"
+#@onready var _DecoPanel_Node: Panel = $"DecoPanel"
 @onready var _CardName_Node: RichTextLabel = $"DecoPanel/CardName"
 @onready var _LightCost_Node: RichTextLabel = $"DecoPanel/LightCost"
 @onready var _CountInHand_Node: RichTextLabel = $"DecoPanel/CountInHand"
@@ -13,7 +13,7 @@ var cardcolor: Color = Color.WHITE
 func _ready() -> void:
 	if not is_instance_valid(tibia_ref): return
 	_LightCost_Node.set_text(str(tibia_ref.config_ref.light_cost))
-	_CardName_Node.set_text(tibia_ref.config_ref.card_name)
+	_CardName_Node.set_text(tr(tibia_ref.config_ref.card_name)) # NO_TRANSLATE
 	cardcolor = tibia_ref.config_ref.color
 	self_modulate = cardcolor
 
