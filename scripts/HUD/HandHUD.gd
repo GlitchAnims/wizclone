@@ -61,5 +61,5 @@ func UpdateHandVisual(unit: Unit) -> void:
 	_MaxHand_Label.set_text(str(maxhand))
 	_SpaceRemaining_Label.set_text(str(maxhand-cardcount))
 	
-	if cardcount >= maxhand: _DrawText_Label.set_text("Hand Full")
-	else: _DrawText_Label.set_text("Draw Card")
+	if cardcount >= maxhand: _DrawText_Label.set_text(tr("HAND_FULL"))
+	else: _DrawText_Label.set_text(tr("HAND_NOT_FULL_DRAWING"))
