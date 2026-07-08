@@ -3,6 +3,7 @@ extends Node
 var Stronghold_Node: Stronghold = null
 var Gamespace_Node: Gamespace = null
 var VisualManagement_Node: VisualManagement = null
+var HandHUD_Node: HandHUD = null
 #var Graphical2DNode: Graphical2D = null
 
 #var MainmenuNode: MainMenu = null

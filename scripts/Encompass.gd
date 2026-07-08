@@ -51,8 +51,7 @@ func UpdateSize() -> void:
 	EnergyHUD_Node.scale = itemscale
 
 func UpdateHandVisual() -> void:
-	var player: Player = ClientData.thisPlayer
-	var unit: Unit = player.unit_ref
+	var unit: Unit = ClientData.screenUnit
 	if is_instance_valid(unit): HandHUD_Node.UpdateHandVisual(unit)
 
 var _last_unit: Unit = null
@@ -149,3 +148,7 @@ class HudBar extends RefCounted:
 	var cur: int = 0
 	var last: int = 0
 	var goal: int = 0
+
+## Returns -1 if invalid.
+func TryGetCardTibiaIDByVisualHandIndex(hand_index: int) -> int:
+	return HandHUD_Node.TryGetCardTibiaIDByVisualHandIndex(hand_index)

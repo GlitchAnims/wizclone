@@ -3,7 +3,7 @@ class_name HandHUD extends Control
 const hudcard_scene: PackedScene = preload("res://scenes/HUD/hud_card.tscn")
 
 
-@onready var _DrawBox_Node: Panel = $"HBox1/Drawhud/DrawBox"
+#@onready var _DrawBox_Node: Panel = $"HBox1/Drawhud/DrawBox"
 @onready var _DrawMeter_Node: ProgressBar = $"HBox1/Drawhud/DrawBox/DrawMeter"
 @onready var _DrawText_Label: RichTextLabel = $"HBox1/Drawhud/DrawBox/DrawText"
 
@@ -14,6 +14,7 @@ const hudcard_scene: PackedScene = preload("res://scenes/HUD/hud_card.tscn")
 var hudcard_dict: Dictionary[int, HUDCard] = {}
 
 func _ready() -> void:
+	GameData.HandHUD_Node = self
 	for child in CardHolder_Node.get_children():
 		child.queue_free()
 
@@ -63,3 +64,11 @@ func UpdateHandVisual(unit: Unit) -> void:
 	
 	if cardcount >= maxhand: _DrawText_Label.set_text(tr("HAND_FULL"))
 	else: _DrawText_Label.set_text(tr("HAND_NOT_FULL_DRAWING"))
+
+## Returns -1 if invalid.
+func TryGetCardTibiaIDByVisualHandIndex(hand_index: int) -> int:
+	var hand_size: int = CardHolder_Node.get_child_count()
+	if hand_index >= hand_size: return -1
+	var hudcard: HUDCard = CardHolder_Node.get_child(hand_index) as HUDCard
+	var tib_ID: int = hudcard.tibia_ref.tibia_id
+	return tib_ID

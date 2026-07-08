@@ -218,6 +218,31 @@ func DrawCards(amount: int = 1) -> void:
 		pile_discard.remove_at(random_pick)
 		pile_hand.push_back(tib)
 
+func DiscardCardByTibiaID(id: int = -1, _activate_discard: bool = false) -> void:
+	if id < 0: return
+	synctick = true
+	# TODO Discard Effects
+	if pile_hand.has(id):
+		pile_hand.erase(id)
+		pile_discard.push_back(id)
+
+func ActivateCardByTibiaID(id: int = -1) -> void:
+	if id < 0: return
+	synctick = true
+	
+	var cardtib: CardTibia = GameData.tibialist_cards[id]
+	
+	if pile_hand.has(id):
+		pile_hand.erase(id)
+		pile_discard.push_back(id)
+
+## Returns -1 if invalid.
+#func TryGetCardTibiaIDByHandIndex(hand_index: int) -> int:
+	#var hand_size: int = pile_hand.size()
+	#if hand_index >= hand_size: return -1
+	#var tib_ID: int = pile_hand[hand_index]
+	#return tib_ID
+
 func Jump() -> void:
 	walkpacket.vec += walkpacket.vec_norm * 1.0
 	walkpacket.vec.y += 6.0
