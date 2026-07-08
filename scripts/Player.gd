@@ -68,7 +68,10 @@ func Authority_SendControlsToAll(mouse_worldPos_new: Vector3, intent_new: int) -
 
 func TryActivateCardByTibiaID(id: int) -> void:
 	print(id)
-	unit_ref.DiscardCardByTibiaID(id)
+	if GameData.isServer:
+		unit_ref.Server_ActivateCardByTibiaID(id)
+	else:
+		unit_ref.Request_ActivateCardByTibiaID.rpc_id(1, id)
 
 func _exit_tree():
 	GameData.playerDict.erase(playerID)

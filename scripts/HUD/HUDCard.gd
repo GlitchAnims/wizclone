@@ -2,6 +2,8 @@ class_name HUDCard extends PanelContainer
 
 var tibia_ref: CardTibia = null
 #@onready var _DecoPanel_Node: Panel = $"DecoPanel"
+@onready var _CrossoutBG_Node: Line2D = $"DecoPanel/LightCost/CrossoutBG"
+@onready var _Crossout_Node: Line2D = $"DecoPanel/LightCost/Crossout"
 @onready var _CardName_Node: RichTextLabel = $"DecoPanel/CardName"
 @onready var _LightCost_Node: RichTextLabel = $"DecoPanel/LightCost"
 @onready var _CountInHand_Node: RichTextLabel = $"DecoPanel/CountInHand"
@@ -30,6 +32,10 @@ func SetCounts(inhand: int, indiscard: int) -> void:
 	if indiscard != indiscard_count:
 		indiscard_count = indiscard
 		_CountInDiscard_Node.set_text(str(indiscard))
+
+func SetVisual_EnoughLight(has_enough: bool) -> void:
+	_CrossoutBG_Node.visible = !has_enough
+	_Crossout_Node.visible = !has_enough
 
 const shinesweep_scene: PackedScene = preload("res://scenes/HUD/card_shine_sweep.tscn")
 func PlayIncreaseAnim(_count_prev: int, _count_now: int) -> void:

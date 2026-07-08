@@ -227,22 +227,37 @@ func DiscardCardByTibiaID(id: int = -1, _activate_discard: bool = false) -> void
 		pile_discard.push_back(id)
 
 
+## Request from Client to Server only.[br]
+## Checks if Client Player ID is same as this unit's Pilot Player, 
+## then calls [method Unit.Server_ActivateCardByTibiaID].
 @rpc("any_peer", "call_remote", "reliable", 1)
 func Request_ActivateCardByTibiaID(id: int = -1) -> void:
-	print(id)
+	if not GameData.isServer: return
+	if not is_instance_valid(pilot_ref): return
+	if pilot_ref is not Player: return
+	var player: Player = pilot_ref as Player
+	var senderID: int = multiplayer.get_remote_sender_id()
+	if player.playerID != senderID: return # LOUD INCORRECT BUZZER
+	Server_ActivateCardByTibiaID(id)
 
-## Only call on Server
+## Only call on Server.[br]
+## Calls [method Unit.Server_ActivateCard] if successful.
 func Server_ActivateCardByTibiaID(id: int = -1) -> void:
 	if id < 0: return
 	if not pile_hand.has(id): return
 	var cardtib: CardTibia = GameData.tibialist_cards[id]
-	
-	
-	
+	Server_ActivateCard(cardtib)
+
+## Only call on Server.
+func Server_ActivateCard(card: CardTibia) -> void:
+	var cardconfig: CardConfig = card.config_ref
+	if cardconfig.light_cost > light: return
+	light -= cardconfig.light_cost
+	# TODO can activate card y/n
 	
 	synctick = true
-	pile_hand.erase(id)
-	pile_discard.push_back(id)
+	pile_hand.erase(card.tibia_id)
+	pile_discard.push_back(card.tibia_id)
 
 ## Returns -1 if invalid.
 #func TryGetCardTibiaIDByHandIndex(hand_index: int) -> int:

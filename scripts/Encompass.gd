@@ -107,10 +107,16 @@ func _physics_process(delta: float) -> void:
 	if Energy2Dot_Node.visible: _ProcessHudBar(unit.energy2, lerpspeed, _hudbar_energy2, 3)
 	
 	_LightLoading_Node.set_value(unit.timer_light)
-	_Light_Node.set_text("[font size=22]" + str(unit.light) + "[/font]")
-	_LightMax_Node.set_text("[font size=28]/[/font][font size=18]" + str(unit.light_max) + "[/font]")
+	var light: int = unit.light
+	if _lightamount != light:
+		_lightamount = light
+		HandHUD_Node.Update_EnoughLight(light)
+		_Light_Node.set_text("[font size=22]" + str(light) + "[/font]")
+		_LightMax_Node.set_text("[font size=28]/[/font][font size=18]" + str(unit.light_max) + "[/font]")
 	
 	HandHUD_Node._process_handhud(unit)
+
+var _lightamount: int = -1
 
 func _ProcessHudBar(value: int, lerpspeed: float, hudbar: HudBar, mode: int) -> void:
 	if value != hudbar.goal:

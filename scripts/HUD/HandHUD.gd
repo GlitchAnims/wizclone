@@ -21,6 +21,11 @@ func _ready() -> void:
 func _process_handhud(unit: Unit) -> void:
 	_DrawMeter_Node.set_value(unit.timer_draw)
 
+func Update_EnoughLight(light: int) -> void:
+	for card: HUDCard in hudcard_dict.values():
+		var cost: int = card.tibia_ref.config_ref.light_cost
+		card.SetVisual_EnoughLight(light >= cost)
+
 func UpdateHandVisual(unit: Unit) -> void:
 	var cardset: Dictionary[int, Vector2i] = {}
 	
