@@ -21,4 +21,6 @@ ExtResource("2_2gmfu"): 4,
 ExtResource("3_3pq3y"): 3,
 ExtResource("4_gnm4s"): 3
 })
+energy1_name = "NRG_FISTOVERHEAT"
+energy1_color = Color(1, 0.23000002, 0.23000002, 1)
 metadata/_custom_type_script = "uid://t133ggsm20sb"
