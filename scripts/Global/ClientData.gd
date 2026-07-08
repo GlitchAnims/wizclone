@@ -7,7 +7,7 @@ var is_spectating: bool = false
 ## Emitted by successful [method ClientData.ChangeScreenUnit]
 signal screenUnit_changed
 
-#@rpc("any_peer", "call_remote", "reliable", 1)
+#@rpc("any_peer", "call_remote", "reliable", 0)
 #func Request_ChangeScreenUnit(unit_ID: int) -> void:
 	#var playerID: int = multiplayer.get_remote_sender_id()
 	#var pilot: Pilot = GameData.playerDict.get(playerID)
@@ -17,7 +17,7 @@ signal screenUnit_changed
 	#
 	#Authority_R_ChangeScreenUnit.rpc_id(playerID, unit_ID)
 #
-#@rpc("authority", "call_remote", "reliable", 1)
+#@rpc("authority", "call_remote", "reliable", 0)
 #func Authority_R_ChangeScreenUnit(unit_ID: int) -> void:
 	#if unit_ID < 0:
 		#screenUnit = null
