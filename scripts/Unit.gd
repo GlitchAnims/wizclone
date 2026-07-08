@@ -54,6 +54,7 @@ var _interval: float = 0
 var fulltime: bool = false
 var walkpacket: WalkPacket = WalkPacket.new()
 var synctick: bool = false
+var synced_this_tick: bool = false
 var mouse_worldPos: Vector3 = Vector3.ZERO
 var intent: int = 0
 
@@ -189,11 +190,19 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	if GameData.isServer and synctick:
-		synctick = false
-		Authority_SyncDeck.rpc(timer_light, timer_draw, light, pile_hand, pile_discard)
-		GameData.sig_updatehandvisual.emit()
-		Authority_SyncVecs.rpc(position, velocity)
+	
+	if GameData.isServer:
+		synced_this_tick = false
+		if synctick:
+			synctick = false
+			synced_this_tick = true
+			Authority_SyncDeck.rpc(timer_light, timer_draw, light, pile_hand, pile_discard)
+			GameData.sig_updatehandvisual.emit()
+			if energy2_enabled:
+				Authority_SyncVecs.rpc(position, velocity, energy1, energy2)
+			elif energy1_enabled:
+				Authority_SyncVecs.rpc(position, velocity, energy1)
+			else: Authority_SyncVecs.rpc(position, velocity)
 	
 	info_realvel = get_real_velocity()
 	info_realspeed = info_realvel.length()
@@ -298,9 +307,11 @@ func Authority_SyncDeck(timer_l: float, timer_d: float, l: int, h: PackedInt32Ar
 	pile_discard = d
 	GameData.sig_updatehandvisual.emit()
 @rpc("authority", "call_remote", "unreliable_ordered")
-func Authority_SyncVecs(pos_new: Vector3, vel_new: Vector3) -> void:
+func Authority_SyncVecs(pos_new: Vector3, vel_new: Vector3, e1: int = energy1, e2: int = energy2) -> void:
 	position = pos_new
 	velocity = vel_new
+	energy1 = e1
+	energy2 = e2
 
 @rpc("authority", "call_remote", "reliable")
 func Authority_R_SetSkill(i: int) -> void:
