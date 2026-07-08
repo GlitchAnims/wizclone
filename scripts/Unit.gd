@@ -61,6 +61,9 @@ var intent: int = 0
 
 func _exit_tree() -> void:
 	GameData.unitDict.erase(unitID)
+func free() -> void:
+	walkpacket.free()
+	super()
 
 func _ready() -> void:
 	GameData.unitDict[unitID] = self
