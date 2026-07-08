@@ -3,9 +3,93 @@
 [ext_resource type="PackedScene" uid="uid://bpubn6v3qskun" path="res://scenes/standin.tscn" id="1_rch47"]
 [ext_resource type="Script" uid="uid://cevj4r3pd200e" path="res://scripts/Unitry/FirefistStandin.gd" id="2_de6yq"]
 [ext_resource type="SpriteFrames" uid="uid://eitjhismfum" path="res://sprites/UnitSprites/Firefist/firefist_spriteframes.tres" id="3_8wn5u"]
+[ext_resource type="Shader" uid="uid://b35xnirqkhhdi" path="res://shaders/firefist_fire.gdshader" id="4_eh6yp"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_iy4j3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8wn5u"]
 viewport_path = NodePath("Status")
+
+[sub_resource type="Gradient" id="Gradient_eh6yp"]
+colors = PackedColorArray(1, 1, 1, 1, 0.9, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wpq0h"]
+gradient = SubResource("Gradient_eh6yp")
+width = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5p4h"]
+resource_local_to_scene = true
+shader = ExtResource("4_eh6yp")
+shader_parameter/direction = Vector3(1, 0, 0)
+shader_parameter/spread = 10.0
+shader_parameter/flatness = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/initial_linear_velocity_min = 29.849998
+shader_parameter/initial_linear_velocity_max = 29.849998
+shader_parameter/directional_velocity_min = 1.0
+shader_parameter/directional_velocity_max = 1.0
+shader_parameter/angular_velocity_min = 0.0
+shader_parameter/angular_velocity_max = 0.0
+shader_parameter/orbit_velocity_min = 0.0
+shader_parameter/orbit_velocity_max = 0.0
+shader_parameter/radial_velocity_min = 0.0
+shader_parameter/radial_velocity_max = 0.0
+shader_parameter/linear_accel_min = 0.0
+shader_parameter/linear_accel_max = 0.0
+shader_parameter/radial_accel_min = 0.0
+shader_parameter/radial_accel_max = 0.0
+shader_parameter/tangent_accel_min = 0.0
+shader_parameter/tangent_accel_max = 0.0
+shader_parameter/damping_min = 1.493
+shader_parameter/damping_max = 2.986
+shader_parameter/initial_angle_min = 0.0
+shader_parameter/initial_angle_max = 0.0
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 1.0
+shader_parameter/hue_variation_min = 0.0
+shader_parameter/hue_variation_max = 0.0
+shader_parameter/anim_speed_min = 0.0
+shader_parameter/anim_speed_max = 0.0
+shader_parameter/anim_offset_min = 0.0
+shader_parameter/anim_offset_max = 0.0
+shader_parameter/lifetime_randomness = 0.0
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
+shader_parameter/velocity_pivot = Vector3(0, 0, 0)
+shader_parameter/color_value = Color(1, 1, 1, 1)
+shader_parameter/gravity = Vector3(0, 10, 0)
+shader_parameter/color_ramp = SubResource("GradientTexture1D_wpq0h")
+shader_parameter/collision_friction = 0.14
+shader_parameter/collision_bounce = 0.13
+shader_parameter/turbulence_noise_strength = 0.5
+shader_parameter/turbulence_noise_scale = -0.723855
+shader_parameter/turbulence_influence_min = 0.062000003
+shader_parameter/turbulence_influence_max = 0.1
+shader_parameter/turbulence_initial_displacement_min = 0.0
+shader_parameter/turbulence_initial_displacement_max = 0.0
+shader_parameter/turbulence_noise_speed_random = 0.2
+shader_parameter/turbulence_noise_speed = Vector3(0, 0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_iy4j3"]
+offsets = PackedFloat32Array(0, 0.5494119)
+colors = PackedColorArray(1, 0.857, 0.22000003, 1, 1, 0.36, 0.36, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_idn7g"]
+seed = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t5p4h"]
+width = 5
+height = 5
+noise = SubResource("FastNoiseLite_idn7g")
+color_ramp = SubResource("Gradient_iy4j3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh6yp"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("NoiseTexture2D_t5p4h")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8wn5u"]
+material = SubResource("StandardMaterial3D_eh6yp")
+size = Vector2(0.5, 0.5)
 
 [node name="Standin" unique_id=58794335 instance=ExtResource("1_rch47")]
 script = ExtResource("2_de6yq")
@@ -14,10 +98,20 @@ script = ExtResource("2_de6yq")
 visible = false
 
 [node name="StatusSprite" parent="GUI" parent_id_path=PackedInt32Array(805633590) index="0" unique_id=951659558]
-texture = SubResource("ViewportTexture_iy4j3")
+texture = SubResource("ViewportTexture_8wn5u")
 
 [node name="GegorSprite" type="AnimatedSprite3D" parent="." index="4" unique_id=137290319]
 offset = Vector2(0, 215)
 pixel_size = 0.003
 billboard = 2
 sprite_frames = ExtResource("3_8wn5u")
+
+[node name="FlamethrowerParticles" type="GPUParticles3D" parent="." index="5" unique_id=1649248125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+amount = 1000
+lifetime = 2.0
+collision_base_size = 0.1
+transform_align = 1
+transform_align_channel_filter = 1
+process_material = SubResource("ShaderMaterial_t5p4h")
+draw_pass_1 = SubResource("QuadMesh_8wn5u")

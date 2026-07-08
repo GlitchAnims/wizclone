@@ -256,10 +256,14 @@ func Server_ActivateCard(card: CardTibia) -> void:
 	if cardconfig.light_cost > light: return
 	light -= cardconfig.light_cost
 	# TODO can activate card y/n
-	
+	if not cardconfig.is_generic:
+		_ActivateCard_Unit(card, cardconfig)
 	synctick = true
 	pile_hand.erase(card.tibia_id)
 	pile_discard.push_back(card.tibia_id)
+
+## Unique card activation. Override this with custom units.
+func _ActivateCard_Unit(_card: CardTibia, _cardconfig: CardConfig) -> void: pass
 
 ## Returns -1 if invalid.
 #func TryGetCardTibiaIDByHandIndex(hand_index: int) -> int:
