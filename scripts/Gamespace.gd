@@ -34,7 +34,7 @@ func _SlowTick() -> void:
 func AddUnitSceneAutoSpawn(path: String) -> void:
 	UnitSpawner_Node.add_spawnable_scene(path)
 
-@rpc("any_peer", "call_local", "reliable", 0)
+@rpc("any_peer", "call_local", "reliable")
 func RequestPilotSeating(unitID: int) -> void:
 	var playerID: int = multiplayer.get_remote_sender_id()
 	var pilot: Pilot = GameData.playerDict.get(playerID) # Player = Pilot

@@ -35,7 +35,7 @@ func add_player(id: int):
 	
 	#var spawnPos: Vector3 = Vector3(ClientData.rng.randf_range(-5.0,5.0), 0.0, ClientData.rng.randf_range(-5.0,5.0))
 
-@rpc("authority", "call_local", "reliable", 0)
+@rpc("authority", "call_local", "reliable")
 func Authority_GivePassword(password: int) -> void:
 	var playerList: Array[Player] = []
 	playerList.assign(get_tree().get_nodes_in_group(&"Players"))
