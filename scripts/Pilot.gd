@@ -15,6 +15,9 @@ func _ready() -> void:
 	_ready_pilot()
 func _ready_pilot() -> void: pass
 
+var synctick: bool = false
+var synced_this_tick: bool = false
+
 func _physics_process(delta: float) -> void:
 	interval += delta
 	if interval >= 0.5:
@@ -26,6 +29,7 @@ func _physics_process(delta: float) -> void:
 func _physics_process_pilot(_delta: float) -> void: pass
 
 func SlowTick(_delta: float) -> void:
+	synctick = true
 	ControlCheck()
 
 func ControlCheck() -> void:

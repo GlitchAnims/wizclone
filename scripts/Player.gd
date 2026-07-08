@@ -45,8 +45,12 @@ func _physics_process_pilot(_delta: float) -> void:
 	if m2: intent_new |= (1 << ClientData.P_FLAG.m2)
 	if Input.is_action_pressed(&"ACT_Shift"): intent_new |= (1 << ClientData.P_FLAG.shift)
 	
-	if GameData.isServer: Authority_SendControlsToAll.rpc(mouse_worldPos, intent_new)
-	else: SendControlsToServer.rpc_id(1, mouse_worldPos, intent_new)
+	synced_this_tick = false
+	if intent != intent_new or synctick:
+		synctick = false
+		synced_this_tick = true
+		if GameData.isServer: Authority_SendControlsToAll.rpc(mouse_worldPos, intent_new)
+		else: SendControlsToServer.rpc_id(1, mouse_worldPos, intent_new)
 	
 	var card_tib: int = -1
 	if Input.is_action_just_pressed(&"ACT_1"): card_tib = GameData.HandHUD_Node.TryGetCardTibiaIDByVisualHandIndex(0)
