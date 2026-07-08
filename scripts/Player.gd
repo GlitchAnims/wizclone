@@ -57,11 +57,11 @@ func _physics_process_pilot(_delta: float) -> void:
 	if card_tib >= 0:
 		TryActivateCardByTibiaID(card_tib)
 
-@rpc("call_remote", "any_peer", "unreliable_ordered", 2)
+@rpc("any_peer", "call_remote", "unreliable_ordered", 2)
 func SendControlsToServer(mouse_worldPos_new: Vector3, intent_new: int) -> void:
 	Authority_SendControlsToAll.rpc(mouse_worldPos_new, intent_new)
 
-@rpc("call_local", "authority", "unreliable_ordered", 2)
+@rpc("authority", "call_local", "unreliable_ordered", 2)
 func Authority_SendControlsToAll(mouse_worldPos_new: Vector3, intent_new: int) -> void:
 	mouse_worldPos = mouse_worldPos_new
 	intent = intent_new

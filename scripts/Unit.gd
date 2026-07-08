@@ -226,15 +226,23 @@ func DiscardCardByTibiaID(id: int = -1, _activate_discard: bool = false) -> void
 		pile_hand.erase(id)
 		pile_discard.push_back(id)
 
-func ActivateCardByTibiaID(id: int = -1) -> void:
+
+@rpc("any_peer", "call_remote", "reliable", 1)
+func Request_ActivateCardByTibiaID(id: int = -1) -> void:
+	print(id)
+
+## Only call on Server
+func Server_ActivateCardByTibiaID(id: int = -1) -> void:
 	if id < 0: return
-	synctick = true
-	
+	if not pile_hand.has(id): return
 	var cardtib: CardTibia = GameData.tibialist_cards[id]
 	
-	if pile_hand.has(id):
-		pile_hand.erase(id)
-		pile_discard.push_back(id)
+	
+	
+	
+	synctick = true
+	pile_hand.erase(id)
+	pile_discard.push_back(id)
 
 ## Returns -1 if invalid.
 #func TryGetCardTibiaIDByHandIndex(hand_index: int) -> int:
@@ -251,7 +259,7 @@ func Jump() -> void:
 	Authority_R_JumpEffects.rpc(position)
 
 const pb_jump_scene: PackedScene = preload("res://scenes/ParticleBlobs/pb_jump.tscn")
-@rpc("call_remote", "authority", "reliable", 1)
+@rpc("authority", "call_remote", "reliable", 1)
 func Authority_R_JumpEffects(jump_pos: Vector3) -> void:
 	var node_new: ParticleBlob = pb_jump_scene.instantiate()
 	node_new.position = jump_pos
@@ -273,7 +281,7 @@ func PilotCheck() -> void:
 			pilot_ref.unit_ref = self
 		elif GameData.isServer: Authority_SetPilotIDRef.rpc(-1)
 
-@rpc("call_remote", "authority", "reliable", 1)
+@rpc("authority", "call_remote", "reliable", 1)
 func Authority_SyncDeck(timer_l: float, timer_d: float, l: int, h: PackedInt32Array, d: PackedInt32Array) -> void:
 	timer_light = timer_l
 	timer_draw = timer_d
@@ -281,12 +289,12 @@ func Authority_SyncDeck(timer_l: float, timer_d: float, l: int, h: PackedInt32Ar
 	pile_hand = h
 	pile_discard = d
 	GameData.sig_updatehandvisual.emit()
-@rpc("call_remote", "authority", "unreliable_ordered", 2)
+@rpc("authority", "call_remote", "unreliable_ordered", 2)
 func Authority_SyncVecs(pos_new: Vector3, vel_new: Vector3) -> void:
 	position = pos_new
 	velocity = vel_new
 
-@rpc("call_remote", "authority", "reliable", 1)
+@rpc("authority", "call_remote", "reliable", 1)
 func Authority_R_SetSkill(i: int) -> void:
 	# Only clients receive this, and skills cannot be changed unless charge is 0.
 	# So, if this is received in the wrong order, force skillcancel.
@@ -296,7 +304,7 @@ func Authority_R_SetSkill(i: int) -> void:
 	skill_selected_i = i
 	skill_selected = skill_list[skill_selected_i]
 
-@rpc("call_remote", "authority", "unreliable_ordered", 2)
+@rpc("authority", "call_remote", "unreliable_ordered", 2)
 func Authority_R_SetSkillCharge(chrg: float) -> void:
 	skill_charge = chrg
 
@@ -314,7 +322,7 @@ func Server_CheckActivation(m1: bool) -> void:
 		Authority_R_ActivateSkill.rpc(skill_selected_i)
 		Client_ActivateSkill()
 
-@rpc("call_remote", "authority", "unreliable_ordered", 2)
+@rpc("authority", "call_remote", "unreliable_ordered", 2)
 func Authority_R_ActivateSkill(i: int) -> void:
 	skill_selected_i = i
 	skill_selected = skill_list[i]
@@ -327,11 +335,11 @@ func Client_ActivateSkill() -> void:
 ## Unit unique override
 func EnactSkill() -> void: pass
 
-@rpc("call_local", "authority", "reliable", 1)
+@rpc("authority", "call_local", "reliable", 1)
 func Authority_SetPilotIDRef(id: int) -> void:
 	pilotID_ref = id
 
-@rpc("call_local", "authority", "reliable", 1)
+@rpc("authority", "call_local", "reliable", 1)
 func Authority_SetNewPilot(newPilotID: int) -> void:
 	var pilot: Pilot = GameData.pilotDict.get(newPilotID)
 	if is_instance_valid(pilot): pilotID_ref = pilot.pilotID
