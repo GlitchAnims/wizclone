@@ -52,6 +52,24 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_o7ajc")
+unitID = null
+pilotID_ref = null
+unitidentifier = null
+hp_max = null
+hp = null
+sanity_enabled = null
+sanity = null
+energy1_enabled = null
+energy1 = null
+energy2_enabled = null
+energy2 = null
+skill_selected_i = null
+light_max = null
+light = null
+pile_hand = null
+pile_discard = null
+timer_light = null
+timer_draw = null
 metadata/_custom_type_script = "uid://b0ykym1txudf3"
 
 [node name="ColShape" type="CollisionShape3D" parent="." unique_id=667037343]
@@ -69,9 +87,5 @@ collision_mask = 4
 [node name="ColShape" type="CollisionShape3D" parent="RepulsionArea" unique_id=202425799]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_o7ajc")
-
-[node name="Skills" type="Node" parent="." unique_id=1686492101]
-
-[node name="Deck" type="Node" parent="." unique_id=1512092553]
 
 [node name="Nav" type="NavigationAgent3D" parent="." unique_id=857297883]

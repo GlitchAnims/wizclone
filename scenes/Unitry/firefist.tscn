@@ -5,4 +5,21 @@
 
 [node name="Firefist" unique_id=1610881032 instance=ExtResource("1_jh4pb")]
 script = ExtResource("2_wpq0h")
+unitID = -1
+pilotID_ref = -1
 unitidentifier = &"og_firefist"
+hp_max = 1000
+hp = 1000
+sanity_enabled = true
+sanity = 1000
+energy1_enabled = false
+energy1 = 1000
+energy2_enabled = false
+energy2 = 1000
+skill_selected_i = 0
+light_max = 10
+light = 5
+pile_hand = []
+pile_discard = []
+timer_light = 0.0
+timer_draw = 0.0

@@ -2,8 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bx6iy0abyupfe" path="res://scenes/unit.tscn" id="1_04v54"]
 [ext_resource type="Script" uid="uid://kusx66qp424j" path="res://scripts/Unitry/BugAntlers.gd" id="2_u7ml4"]
-[ext_resource type="Script" uid="uid://cnsx1h0ov7o8x" path="res://scripts/Skills/S_Order.gd" id="3_u7ml4"]
-[ext_resource type="Resource" uid="uid://dh4gdf76cnodj" path="res://configs/SkillConfigs/BugAntlers/OrderStats.tres" id="4_tu2bm"]
 
 [sub_resource type="Animation" id="Animation_83dmu"]
 resource_name = "Act_Order"
@@ -75,8 +73,3 @@ script = ExtResource("2_u7ml4")
 [node name="Act" type="AnimationPlayer" parent="." index="3" unique_id=1317837324]
 root_node = NodePath("../Skills/Order")
 libraries/ = SubResource("AnimationLibrary_vquue")
-
-[node name="Order" type="Node" parent="Skills" parent_id_path=PackedInt32Array(1686492101) index="0" unique_id=1714795644]
-script = ExtResource("3_u7ml4")
-stats = ExtResource("4_tu2bm")
-metadata/_custom_type_script = "uid://yq1lml5sofbw"

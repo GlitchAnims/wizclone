@@ -1,8 +1,6 @@
 class_name Unit extends CharacterBody3D
 
 @onready var RepulsionArea_Node: Area3D = $"RepulsionArea"
-@onready var Skills_Node: Node = $"Skills"
-@onready var Deck_Node: Node = $"Deck"
 
 @export var unitID: int = -1
 var pilot_ref: Pilot = null
@@ -73,14 +71,6 @@ func _ready() -> void:
 		if not is_instance_valid(tibia_ref): tibia_ref = GameData.tibiadict_unitry[unitidentifier]
 		if not is_instance_valid(config_ref): config_ref = tibia_ref.config_ref
 	
-	var skillnodelist: Array[Node] = Skills_Node.get_children()
-	for node in skillnodelist:
-		if node is Skill:
-			var skl: Skill = node as Skill
-			skill_list.push_back(skl)
-			skl.unit_ref = self
-	
-	if skill_list.size() > skill_selected_i: skill_selected = skill_list[skill_selected_i]
 	
 	PilotCheck()
 	
