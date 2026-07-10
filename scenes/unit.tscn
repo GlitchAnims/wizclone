@@ -71,5 +71,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_o7ajc")
 
 [node name="Nav" type="NavigationAgent3D" parent="." unique_id=857297883]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=209342205]

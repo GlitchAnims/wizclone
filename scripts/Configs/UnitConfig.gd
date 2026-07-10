@@ -24,6 +24,9 @@ class_name UnitConfig extends Resource
 ## 3.0 = Red Mist[br]
 @export_range(0.4, 3.0, 0.1) var power_rating: float = 1.0
 
+## Default = 1000
+@export_range(10,10000,10) var default_hp_max: int = 1000
+
 ## Walk Speed Multiplier.[br]1.0 = Standard
 @export_range(0.0, 2.0, 0.05) var move_speed_mult: float = 1.0
 ## Default Light Capacity.[br](units spawn with half this amount of Light)

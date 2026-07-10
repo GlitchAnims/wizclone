@@ -29,6 +29,7 @@ func _SlowTick() -> void:
 			unit_new.tibia_ref = tibia
 			unit_new.unitID = GameData.GetUniqueUnitID()
 			unit_new.pilotID_ref = player.pilotID
+			unit_new.SetupHP(config.default_hp_max)
 			Unitry_Node.add_child(unit_new, true)
 
 func AddUnitSceneAutoSpawn(path: String) -> void:
