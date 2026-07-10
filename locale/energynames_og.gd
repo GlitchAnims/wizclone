@@ -1,4 +1,4 @@
 
 
 func EnergyNames() -> void:
-	tr("NRG_FISTOVERHEAT")
+	tr(&"NRG_FISTOVERHEAT")

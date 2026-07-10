@@ -3,7 +3,7 @@ class_name UnitConfig extends Resource
 ## Format this as follows:[br]"mod_ID" = "og_bloodfiend"[br]
 ##Utilizing the same identifier as another unit will overwrite it.
 @export var identifier: StringName = &""
-@export var unit_name: String = ""
+@export var unit_name: StringName = &""
 @export var unit_scene: PackedScene = null
 @export var standin_scene: PackedScene = preload("res://scenes/standin.tscn")
 
@@ -35,9 +35,9 @@ class_name UnitConfig extends Resource
 ## Default amount of time per Card Draw in seconds.
 @export_range(0.0, 4.0, 0.1) var default_card_regen: float = 2.3
 
-@export var energy1_name: String = "N/A"
+@export var energy1_name: StringName = &"N/A"
 @export var energy1_color: Color = Color.WHITE
 @export var energy1_icon: Texture2D = preload("res://icon.svg")
-@export var energy2_name: String = "N/A"
+@export var energy2_name: StringName = &"N/A"
 @export var energy2_color: Color = Color.WHITE
 @export var energy2_icon: Texture2D = preload("res://icon.svg")
