@@ -58,6 +58,8 @@ func ActualizeTibiaList() -> void:
 
 signal sig_updatehandvisual
 
+var bufDict: Dictionary[int, Buf] = {}
+
 var unitDict: Dictionary[int, Unit] = {}
 var pilotDict: Dictionary[int, Pilot] = {}
 var playerDict: Dictionary[int, Player] = {}

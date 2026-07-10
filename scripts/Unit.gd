@@ -67,6 +67,14 @@ var stat_def_minus: int = 0
 var stat_haste: int = 0
 var stat_bind: int = 0
 
+var buflist_id: PackedInt32Array = []
+var buflist_shortcut: Array[Buf] = []
+
+func UpdateShortcutBufList() -> void:
+	pass
+func UpdateStats() -> void:
+	pass
+
 
 func _exit_tree() -> void:
 	GameData.unitDict.erase(unitID)
