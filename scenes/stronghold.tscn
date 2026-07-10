@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://js26ljisydam" path="res://scripts/PlayerSpawner.gd" id="4_evvgm"]
 [ext_resource type="Resource" uid="uid://dstf7d2k7x2v0" path="res://configs/UnitConfigs/Firefist.tres" id="4_ptabd"]
 [ext_resource type="Resource" uid="uid://bro2yf3qe4t77" path="res://configs/UnitConfigs/BugAntlers.tres" id="4_v57l1"]
+[ext_resource type="Script" uid="uid://dg68sqmeghnaq" path="res://scripts/Configs/BufConfig.gd" id="5_d1taa"]
+[ext_resource type="Resource" uid="uid://ojlw7ilgqem6" path="res://configs/BufConfigs/Shin.tres" id="6_0aspb"]
 [ext_resource type="Script" uid="uid://si2wavx52a60" path="res://scripts/VisualManagement.gd" id="6_2yxuj"]
 [ext_resource type="Texture2D" uid="uid://dguov6ian7xin" path="res://sprites/Mouse/loadcircle.png" id="6_umgfj"]
 [ext_resource type="StyleBox" uid="uid://bu67wnmra0jvy" path="res://styles/statusbarbg_sp.tres" id="9_1v5lc"]
@@ -68,6 +70,7 @@ corner_detail = 1
 [node name="Stronghold" type="Node" unique_id=495344873]
 script = ExtResource("1_mw8q0")
 og_unitry = Array[ExtResource("2_ptabd")]([ExtResource("4_v57l1"), ExtResource("4_ptabd")])
+og_bufs = Array[ExtResource("5_d1taa")]([ExtResource("6_0aspb")])
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=874524148]
 _spawnable_scenes = PackedStringArray("uid://7u5rpxdcfusb")
@@ -84,6 +87,9 @@ metadata/_custom_type_script = "uid://d2t127lkc868q"
 
 [node name="UnitSpawner" type="MultiplayerSpawner" parent="Gamespace" unique_id=1175697082]
 spawn_path = NodePath("../Unitry")
+
+[node name="BufSpawner" type="MultiplayerSpawner" parent="Gamespace" unique_id=873671786]
+spawn_path = NodePath(".")
 
 [node name="Unitry" type="Node3D" parent="Gamespace" unique_id=1830807825]
 

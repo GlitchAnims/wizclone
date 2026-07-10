@@ -6,6 +6,7 @@ class_name Stronghold extends Node
 
 @export var og_unitry: Array[UnitConfig] = []
 @export var og_extracards: Array[CardConfig] = []
+@export var og_bufs: Array[BufConfig] = []
 
 func _ready() -> void:
 	GameData.Stronghold_Node = self
@@ -15,12 +16,15 @@ func _ready() -> void:
 	#if configsDir: VanillaUtil.LoadConfigFiles(configsDir)
 	
 	GameData.configlist_unitry.append_array(og_unitry)
+	GameData.configlist_bufs.append_array(og_bufs)
 	
 	GameData.ActualizeConfigLists(og_extracards)
 	GameData.ActualizeTibiaList()
 	
 	for config in GameData.configlist_unitry:
 		Gamespace_Node.AddUnitSceneAutoSpawn(config.unit_scene.resource_path)
+	for config in GameData.configlist_unitry:
+		Gamespace_Node.AddBufSceneAutoSpawn(config.unit_scene.resource_path)
 	
 	var conmenu: ConnectMenu = GameData.connectmenuScene.instantiate()
 	Encompass_Node.add_child(conmenu)

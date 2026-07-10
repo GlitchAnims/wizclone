@@ -20,11 +20,16 @@ var isDedicated: bool = false
 var rayquery_wall: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(Vector3.ZERO, Vector3.ZERO, 0b0010)
 
 var configlist_unitry: Array[UnitConfig] = []
-var configlist_cards: Array[CardConfig] = []
 var tibialist_unitry: Array[UnitTibia] = []
-var tibialist_cards: Array[CardTibia] = []
 var tibiadict_unitry: Dictionary[StringName, UnitTibia] = {}
+
+var configlist_cards: Array[CardConfig] = []
+var tibialist_cards: Array[CardTibia] = []
 var tibiadict_cards: Dictionary[StringName, CardTibia] = {}
+
+var configlist_bufs: Array[BufConfig] = []
+var tibialist_bufs: Array[BufTibia] = []
+var tibiadict_bufs: Dictionary[StringName, BufTibia] = {}
 
 func ActualizeConfigLists(extracards: Array[CardConfig]) -> void:
 	configlist_cards.clear()
@@ -41,6 +46,8 @@ func ActualizeTibiaList() -> void:
 	tibiadict_unitry.clear()
 	tibialist_cards.clear()
 	tibiadict_cards.clear()
+	tibialist_bufs.clear()
+	tibiadict_bufs.clear()
 	
 	var unitcount: int = configlist_unitry.size()
 	for i in unitcount:
@@ -55,6 +62,13 @@ func ActualizeTibiaList() -> void:
 		var new_cardtibia: CardTibia = CardTibia.new(config, i)
 		tibialist_cards.push_back(new_cardtibia)
 		tibiadict_cards[config.identifier] = new_cardtibia
+	
+	var bufcount: int = configlist_bufs.size()
+	for i in bufcount:
+		var config: BufConfig = configlist_bufs[i]
+		var new_buftibia: BufTibia = BufTibia.new(config, i)
+		tibialist_bufs.push_back(new_buftibia)
+		tibiadict_bufs[config.identifier] = new_buftibia
 
 signal sig_updatehandvisual
 
