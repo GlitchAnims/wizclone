@@ -58,6 +58,16 @@ var synced_this_tick: bool = false
 var mouse_worldPos: Vector3 = Vector3.ZERO
 var intent: int = 0
 
+
+# Stat Increases
+var stat_atk_plus: int = 0
+var stat_atk_minus: int = 0
+var stat_def_plus: int = 0
+var stat_def_minus: int = 0
+var stat_haste: int = 0
+var stat_bind: int = 0
+
+
 func _exit_tree() -> void:
 	GameData.unitDict.erase(unitID)
 func free() -> void:
