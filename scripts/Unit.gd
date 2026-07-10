@@ -12,7 +12,9 @@ var tibia_ref: UnitTibia = null
 
 var standin_ref: Standin = null
 
+## Sync Var (Do not edit this variable, use [member UnitConfig.default_hp_max] instead.)
 @export_range(10,10000,1) var hp_max: int = 1000
+## Sync Var (Do not edit this variable, use [member UnitConfig.default_hp_max] instead.)
 @export_range(10,10000,1) var hp: int = 1000
 func SetupHP(hp_max_new: int = 1000) -> void:
 	hp_max = hp_max_new
