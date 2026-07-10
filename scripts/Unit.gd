@@ -14,10 +14,20 @@ var tibia_ref: UnitTibia = null
 var pilot_ref: Pilot = null
 var standin_ref: Standin = null
 
+## Called by Server when spawned, before adding as child to tree.
+func Server_SetupForSpawn(tibia: UnitTibia, uniqueunitid: int) -> void:
+	config_ref = tibia.config_ref
+	tibia_ref = tibia
+	unitID = uniqueunitid
+	unitidentifier = config_ref.identifier
+	SetupHP(config_ref.default_hp_max)
+	SetupLight(config_ref.default_light_max)
+
 ## Sync Var (Do not change this. Use [member UnitConfig.default_hp_max] instead.)
 @export_storage var hp_max: int = 1000
 ## Sync Var (Do not change this. Use [member UnitConfig.default_hp_max] instead.)
 @export_storage var hp: int = 1000
+## Auto-called by [method Unit.Server_SetupForSpawn]
 func SetupHP(hp_max_new: int = 1000) -> void:
 	hp_max = hp_max_new
 	hp = hp_max_new
@@ -44,6 +54,7 @@ var skill_acting: bool = false
 ## Sync Var (Do not change this. Use [member UnitConfig.default_light_max] instead.)[br]
 ## Current Light. Synced by Server.
 @export_storage var light: int = 5
+## Auto-called by [method Unit.Server_SetupForSpawn]
 func SetupLight(max_new: int = 10) -> void:
 	light_max = max_new
 	light = floor(float(max_new) / 2)
