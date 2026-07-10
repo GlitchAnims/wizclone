@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#: scripts/HUD/HandHUD.gd:64
+#: scripts/HUD/HandHUD.gd:70
 msgid "HAND_FULL"
 msgstr "Hand Full"
 
-#: scripts/HUD/HandHUD.gd:65
+#: scripts/HUD/HandHUD.gd:71
 msgid "HAND_NOT_FULL_DRAWING"
 msgstr "Drawing Card"
 
@@ -50,6 +50,23 @@ msgid "CARD_DESC_D12Fuel"
 msgstr ""
 "Usable during a Flamethrower Attack.\n"
 "Instantly extends the duration of a Flamethrower attack by 1.0s."
+
+#: locale/energynames_og.gd:4
+msgid "NRG_FISTOVERHEAT"
+msgstr "Canister Overheat"
+
+#: locale/bufnames_og.gd:4
+msgid "BUF_SHIN"
+msgstr "Shin"
+
+#: locale/bufnames_og.gd:5
+msgid "BUF_DESC_SHIN"
+msgstr ""
+"Draws out the Mind; Enhances the body.\n"
+"- Offense +3\n"
+"- Defense +20\n"
+"- Speed +5\n"
+"- Lose 5 SP/s."
 
 msgid "wizclone"
 msgstr "Lethe Battler"
