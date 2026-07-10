@@ -5,6 +5,5 @@
 
 [node name="Firefist" unique_id=1610881032 instance=ExtResource("1_jh4pb")]
 script = ExtResource("2_wpq0h")
-unitidentifier = &"og_firefist"
 energy1_enabled = true
 energy1 = 0

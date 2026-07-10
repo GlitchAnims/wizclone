@@ -2,20 +2,22 @@ class_name Unit extends CharacterBody3D
 
 @onready var RepulsionArea_Node: Area3D = $"RepulsionArea"
 
-@export var unitID: int = -1
-var pilot_ref: Pilot = null
-@export var pilotID_ref: int = -1
+## Sync Var (Do not change this. Automatically determined by Server.)
+@export_storage var unitID: int = -1
+## Sync Var
+@export_storage var pilotID_ref: int = -1
+## Sync Var (Do not change this. Use [member UnitConfig.identifier] instead.)
+@export_storage var unitidentifier: StringName = &""
 
-@export var unitidentifier = &""
 var config_ref: UnitConfig = null
 var tibia_ref: UnitTibia = null
-
+var pilot_ref: Pilot = null
 var standin_ref: Standin = null
 
-## Sync Var (Do not edit this variable, use [member UnitConfig.default_hp_max] instead.)
-@export_range(10,10000,1) var hp_max: int = 1000
-## Sync Var (Do not edit this variable, use [member UnitConfig.default_hp_max] instead.)
-@export_range(10,10000,1) var hp: int = 1000
+## Sync Var (Do not change this. Use [member UnitConfig.default_hp_max] instead.)
+@export_storage var hp_max: int = 1000
+## Sync Var (Do not change this. Use [member UnitConfig.default_hp_max] instead.)
+@export_storage var hp: int = 1000
 func SetupHP(hp_max_new: int = 1000) -> void:
 	hp_max = hp_max_new
 	hp = hp_max_new
@@ -36,21 +38,26 @@ var skill_using: bool = false
 var skill_backwards: bool = false
 var skill_acting: bool = false
 
+## Sync Var (Do not change this. Use [member UnitConfig.default_light_max] instead.)[br]
 ## Max Light. Synced by Server (infrequent).
-@export var light_max: int = 10
+@export_storage var light_max: int = 10
+## Sync Var (Do not change this. Use [member UnitConfig.default_light_max] instead.)[br]
 ## Current Light. Synced by Server.
-@export var light: int = 5
+@export_storage var light: int = 5
 func SetupLight(max_new: int = 10) -> void:
 	light_max = max_new
 	light = floor(float(max_new) / 2)
 
-## Tibia ID list of Cards in Hand. Synced by Server.
-@export var pile_hand: PackedInt32Array = []
-## Tibia ID list of Cards in Discard Pile. Synced by Server.
-@export var pile_discard: PackedInt32Array = []
 
-@export var timer_light: float = 0.0
-@export var timer_draw: float = 0.0
+## Tibia ID list of Cards in Hand. Synced by Server.
+@export_storage var pile_hand: PackedInt32Array = []
+## Tibia ID list of Cards in Discard Pile. Synced by Server.
+@export_storage var pile_discard: PackedInt32Array = []
+
+## 0-1 float. Gain Light at 1.0 and reset.
+var timer_light: float = 0.0
+## 0-1 float. Draw Card at 1.0 and reset.
+var timer_draw: float = 0.0
 
 var _interval: float = 0
 var fulltime: bool = false

@@ -22,21 +22,21 @@ class_name UnitConfig extends Resource
 ## 1.0 = LCB Sinner[br]
 ## 2.8 = Most Color Fixers[br]
 ## 3.0 = Red Mist[br]
-@export_range(0.4, 3.0, 0.1) var power_rating: float = 1.0
+@export_range(0.4, 3.0, 0.1, "or_greater") var power_rating: float = 1.0
 
 ## Default = 1000
-@export_range(10,10000,10) var default_hp_max: int = 1000
+@export_range(10,10000,10, "or_greater") var default_hp_max: int = 1000
 
 ## Walk Speed Multiplier.[br]1.0 = Standard
-@export_range(0.0, 2.0, 0.05) var move_speed_mult: float = 1.0
+@export_range(0.0, 2.0, 0.05, "or_greater") var move_speed_mult: float = 1.0
 ## Default Light Capacity.[br](units spawn with half this amount of Light)
-@export_range(1, 20) var default_light_max: int = 10
+@export_range(1, 20, 1, "prefer_slider", "or_greater") var default_light_max: int = 10
 ## Default Hand Max Size.[br](units spawn by drawing 3 cards)
-@export_range(3, 15) var default_hand_max: int = 8
+@export_range(3, 15, 1, "prefer_slider", "or_greater") var default_hand_max: int = 8
 ## Default amount of time per Light Regeneration in seconds.
-@export_range(0.0, 4.0, 0.1) var default_light_regen: float = 2.0
+@export_range(0.2, 4.0, 0.1, "or_greater") var default_light_regen: float = 2.0
 ## Default amount of time per Card Draw in seconds.
-@export_range(0.0, 4.0, 0.1) var default_card_regen: float = 2.3
+@export_range(0.2, 5.0, 0.1, "or_greater") var default_card_regen: float = 2.50
 
 @export var energy1_name: StringName = &"N/A"
 @export var energy1_color: Color = Color.WHITE
