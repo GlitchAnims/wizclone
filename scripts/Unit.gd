@@ -79,7 +79,7 @@ var mouse_worldPos: Vector3 = Vector3.ZERO
 var intent: int = 0
 
 
-# Stat Increases
+# Stat Increases. NEVER substract ANY of these, you FUCKING IDIOT MODDER.
 var stat_atk_plus: int = 0
 var stat_atk_minus: int = 0
 var stat_def_plus: int = 0
@@ -87,13 +87,23 @@ var stat_def_minus: int = 0
 var stat_haste: int = 0
 var stat_bind: int = 0
 
-var buflist_id: PackedInt32Array = []
+## Sync var.
+@export_storage var buflist_id: PackedInt32Array = []
 var buflist_shortcut: Array[Buf] = []
 
 func UpdateShortcutBufList() -> void:
 	pass
-func UpdateStats() -> void:
-	pass
+func UpdateStats(upd_shortcut: bool = true) -> void:
+	stat_atk_plus = 0
+	stat_atk_minus = 0
+	stat_def_plus = 0
+	stat_def_minus = 0
+	stat_haste = 0
+	stat_bind = 0
+	
+	if upd_shortcut: UpdateShortcutBufList()
+	for buf in buflist_shortcut:
+		buf.ModifyUnitStats()
 
 
 func _exit_tree() -> void:
@@ -330,6 +340,14 @@ func _SlowTick(_delta: float) -> void:
 	if GameData.isServer:
 		synctick = true
 		if fulltime: pass
+		Authority_SyncBufs(buflist_id)
+	
+	UpdateShortcutBufList()
+	UpdateStats(false)
+
+@rpc("authority", "call_remote", "reliable")
+func Authority_SyncBufs(bufids: PackedInt32Array) -> void:
+	buflist_id = bufids
 
 func PilotCheck() -> void:
 	if not is_instance_valid(pilot_ref) && pilotID_ref != -1:
